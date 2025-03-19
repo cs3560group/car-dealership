@@ -8,8 +8,8 @@ Tai Bui - @buitai97 - taibui@cpp.edu
 
 **Vehicle Management**: Able to add/update, and remove sold vehicles with details like **the make, model**, price, year, new/used, and status.
 **Search and filter**: Searching for vehicles based on certain criteria. 
-**Sales Tracking**: Updating a vehicle status when a sale occurs 
-**Automatic Stock Updates/Alerts**: Notifies managers when a certain stock falls below a certain threshold
+**Sales Tracking**: Updating a vehicle status when a sale occurs.
+**Automatic Stock Updates/Alerts**: Notifies managers when a certain stock falls below a certain threshold.
 
 ## Installation
 
