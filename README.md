@@ -36,13 +36,12 @@ git clone https://github.com/cs3560group/car-dealership.git
 ## Contributing (Pull Request)
 
 1. Fork the repository.
-2. Create a new branch off 'dev' branch .
-   - branch should be named regarding Tracker/number (Eg: task/1)
+2. Create a new branch.
 3. Make your changes.
 4. Commit your changes.
 5. Push to your branch.
 6. Open a pull request with detailed information about changes made.
-   - PR title: tracker/number: task name (Eg: task/2: Add Pull request template)
-   - PR body: follow PR template and remove unnecessary description.
+   - PR title:  task name
+   - PR body: follow PR template
 
 
