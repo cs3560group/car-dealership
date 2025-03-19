@@ -29,7 +29,7 @@ Extension Pack for Java
 Clone the repository
 
 ```bash
-git clone 
+git clone https://github.com/cs3560group/car-dealership.git
 ```
 
 
