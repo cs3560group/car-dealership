@@ -3,6 +3,7 @@
 ## Group members
 
 Tai Bui - @buitai97 - taibui@cpp.edu
+Noah Ojeda - @knowsnoah - nsojeda@cpp.edu
 
 ## Usage and Features
 
