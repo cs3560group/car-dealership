@@ -3,7 +3,9 @@
 ## Group members
 
 Tai Bui - @buitai97 - taibui@cpp.edu
+
 Noah Ojeda - @knowsnoah - nsojeda@cpp.edu
+
 Timothy Lee - @t1mato - tnlee@cpp.edu
 
 ## Usage and Features
