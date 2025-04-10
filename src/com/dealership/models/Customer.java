@@ -1,11 +1,14 @@
 package com.dealership.models;
 
 public class Customer {
+
+    // Customer class with name, phone number, email, and ID attributes
     private String name;
     private String phoneNumber;
     private String email;
     private String ID;
 
+    // Constructor
     public Customer(String name, String phoneNumber, String email, String ID) {
         this.name = name;
         this.phoneNumber = phoneNumber;
@@ -13,6 +16,7 @@ public class Customer {
         this.ID = ID;
     }
 
+    //Required Methods for class
     public String getName() {
         return name;
     }

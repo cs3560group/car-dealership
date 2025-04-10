@@ -1,6 +1,8 @@
 package com.dealership.models;
 
 public abstract class Vehicle {
+
+    // Vehicle class with vin, make, model, year, price, status, and condition attributes
     protected String vin;
     protected String make;
     protected String model;
@@ -9,6 +11,7 @@ public abstract class Vehicle {
     protected String status;
     protected String condition;
 
+    // Constructor
     public Vehicle(String vin, String make, String model, int year, double price, String status, String condition) {
         this.vin = vin;
         this.make = make;
@@ -18,6 +21,8 @@ public abstract class Vehicle {
         this.status = status;
         this.condition = condition;
     }
+    
+    // Required Methods for class
     public String getVin() {
         return vin;
     }

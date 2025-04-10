@@ -1,11 +1,14 @@
 package com.dealership.models;
 
 public class Supplier {
+
+    // Supplier class with name, phone number, email, and ID attributes
     private String supplierName;
     private String supplierPhoneNumber;
     private String supplierEmail;
     private String supplierID;
 
+    // Constructor
     public Supplier(String supplierName, String supplierPhoneNumber, String supplierEmail, String supplierID) {
         this.supplierName = supplierName;
         this.supplierPhoneNumber = supplierPhoneNumber;
@@ -13,6 +16,7 @@ public class Supplier {
         this.supplierID = supplierID;
     }
 
+    // Required Methods for class
     public String getSupplierName() {
         return supplierName;
     }
