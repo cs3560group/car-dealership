@@ -22,7 +22,7 @@ public abstract class Vehicle {
         this.condition = condition;
     }
     
-    // Required Methods for class
+    // Required Methods for class (The getters)
     public String getVin() {
         return vin;
     }
@@ -43,6 +43,15 @@ public abstract class Vehicle {
     }
     public String getCondition() {
         return condition;
+    }
+
+    //To see if a vehicle is sold
+    public boolean isSold() {
+        return status != null && status.equalsIgnoreCase("sold");
+    }
+    //method to mark the vehcile as sold
+    public void markAsSold() {
+        this.status = "sold";
     }
 
     public abstract void displayInfo();

@@ -26,6 +26,7 @@ public class UsedVehicle extends Vehicle {
         System.out.println("Status: " + status);
         System.out.println("Condition: " + condition);
         System.out.println("Mileage: " + mileage);
+        System.out.println("Previous Owners: " + previousOwners);
     }
 
 }
