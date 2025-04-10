@@ -1,4 +1,4 @@
-package com.dealership.models;
+package com.dealership;
 
 public class Customer {
 
