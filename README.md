@@ -37,12 +37,18 @@ Recommended extensions
 Extension Pack for Java
 ```
 
-Clone the repository
+1. **Clone the repository**
 
 ```bash
 git clone https://github.com/cs3560group/car-dealership.git
 ```
-
+2. Import the Database
+Use MySQL CLI or Workbench:
+3. Assign USER and PASSWORD to your own local database user and password 
+4. Run the app
+```bash
+mvn clean compile exec:java
+```
 
 ## Contributing (Pull Request)
 
