@@ -27,7 +27,10 @@ Alejandro Manzo - @alejandro2520 - amanzo@cpp.edu
 Minimum requirements
 
 ```bash
-#Any required tool to run the project
+- Java JDK (version 11 or higher)
+- Apache Maven (3.6 or higher)
+- MySQL Server (8.0+ recommended)
+- MySQL Workbench (optional for GUI access)
 ```
 
 Recommended extensions
