@@ -63,6 +63,9 @@ public class Main extends Application {
                 primaryStage.show();
         }
 
+        /**
+         * Updates the vehicle grid with the latest data from the database.
+         */
         private void updateVehicleGrid() {
                 vehicleGrid.getChildren().clear();
                 int columnCount = 3;
@@ -73,6 +76,7 @@ public class Main extends Application {
                         Statement stmt = conn.createStatement();
                         ResultSet rs = stmt.executeQuery("SELECT * FROM vehicles");
 
+                        // loop through the result set and create a card for each vehicle
                         while (rs.next()) {
                                 VBox card = new VBox(5);
                                 card.setPadding(new Insets(10));
@@ -104,21 +108,5 @@ public class Main extends Application {
 
         public static void main(String[] args) {
                 launch(args);
-                try (Connection conn = DBConnection.getConnection()) {
-                        System.out.println("✅ Connected to MySQL!");
-
-                        Statement stmt = conn.createStatement();
-                        ResultSet rs = stmt.executeQuery("SELECT * FROM vehicles");
-
-                        while (rs.next()) {
-                                System.out.println("Name: " + rs.getString("VIN") + ", Make: " + rs.getString("make")
-                                                + ", model: " + rs.getString("model") + ", year: "
-                                                + rs.getInt("year") + ", price: " + rs.getDouble("price"));
-                        }
-                        DBConnection.closeConnection(conn);
-
-                } catch (SQLException e) {
-                        System.out.println("Connection failed: " + e.getMessage());
-                }
         }
 }
