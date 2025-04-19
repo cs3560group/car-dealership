@@ -1,17 +1,26 @@
 package com.dealership.ui;
 
-import com.dealership.models.UsedVehicle;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.dealership.db.DBConnection;
+import com.dealership.models.Vehicle;
+import com.dealership.services.Inventory;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import com.dealership.models.Vehicle;
-import com.dealership.services.Inventory;
 
 public class Main extends Application {
 
@@ -21,24 +30,6 @@ public class Main extends Application {
 
         @Override
         public void start(Stage primaryStage) {
-                // Initial Vehicles
-                inventory.addVehicle(
-                                new UsedVehicle("1HGCM82633A123456", "Honda", "Accord", 2020, 20000, "available",
-                                                "good", 30000, 1));
-                inventory.addVehicle(
-                                new UsedVehicle("1HGCM82633A123457", "Toyota", "Camry", 2019, 18000, "available",
-                                                "great", 25000, 2));
-                inventory.addVehicle(new UsedVehicle("1HGCM82633A123458", "Ford", "Fusion", 2018, 16000, "available",
-                                "excellent", 27000, 3));
-                inventory.addVehicle(
-                                new UsedVehicle("1HGCM82633A123457", "Toyota", "Camry", 2016, 17350, "available", "bad",
-                                                100000, 5));
-                inventory.addVehicle(new UsedVehicle("1HGCM82633A123458", "Lamborghini", "Aventador", 2014, 200000,
-                                "available",
-                                "great", 34000, 2));
-
-                displayedVehicles.addAll(inventory.getAvailableVehicles());
-
                 // Search UI
                 TextField searchField = new TextField();
                 searchField.setPromptText("Search by make or model");
@@ -75,28 +66,59 @@ public class Main extends Application {
         private void updateVehicleGrid() {
                 vehicleGrid.getChildren().clear();
                 int columnCount = 3;
-                for (int i = 0; i < displayedVehicles.size(); i++) {
-                        Vehicle v = displayedVehicles.get(i);
+                int i = 0;
+                try (Connection conn = DBConnection.getConnection()) {
+                        System.out.println("✅ Connected to MySQL!");
 
-                        VBox card = new VBox(5);
-                        card.setPadding(new Insets(10));
-                        card.setStyle("-fx-border-color: #ccc; -fx-border-width: 1; -fx-background-color: #f9f9f9;");
+                        Statement stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT * FROM vehicles");
 
-                        Label vinLabel = new Label("VIN: " + v.getVin());
-                        Label makeLabel = new Label("Make: " + v.getMake());
-                        Label modelLabel = new Label("Model: " + v.getModel());
-                        Label yearLabel = new Label("Year: " + v.getYear());
-                        Label priceLabel = new Label("Price: $" + v.getPrice());
+                        while (rs.next()) {
+                                VBox card = new VBox(5);
+                                card.setPadding(new Insets(10));
+                                card.setStyle("-fx-border-color: #ccc; -fx-border-width: 1; -fx-background-color: #f9f9f9;");
 
-                        card.getChildren().addAll(vinLabel, makeLabel, modelLabel, yearLabel, priceLabel);
+                                Label vinLabel = new Label("VIN: " + rs.getString("VIN"));
+                                Label makeLabel = new Label("Make: " + rs.getString("make"));
+                                Label modelLabel = new Label("Model: " + rs.getString("model"));
+                                Label yearLabel = new Label("Year: " + rs.getInt("year"));
+                                Label priceLabel = new Label("Price: $" + rs.getDouble("price"));
 
-                        int col = i % columnCount;
-                        int row = i / columnCount;
-                        vehicleGrid.add(card, col, row);
+                                card.getChildren().addAll(vinLabel, makeLabel, modelLabel, yearLabel, priceLabel);
+
+                                int col = i % columnCount;
+                                int row = i / columnCount;
+                                vehicleGrid.add(card, col, row);
+                                System.out.println("Name: " + rs.getString("VIN") + ", Make: " + rs.getString("make")
+                                                + ", model: " + rs.getString("model") + ", year: "
+                                                + rs.getInt("year") + ", price: " + rs.getDouble("price"));
+                                i++;
+                        }
+                        DBConnection.closeConnection(conn);
+
+                } catch (SQLException e) {
+                        System.out.println("Connection failed: " + e.getMessage());
                 }
+
         }
 
         public static void main(String[] args) {
                 launch(args);
+                try (Connection conn = DBConnection.getConnection()) {
+                        System.out.println("✅ Connected to MySQL!");
+
+                        Statement stmt = conn.createStatement();
+                        ResultSet rs = stmt.executeQuery("SELECT * FROM vehicles");
+
+                        while (rs.next()) {
+                                System.out.println("Name: " + rs.getString("VIN") + ", Make: " + rs.getString("make")
+                                                + ", model: " + rs.getString("model") + ", year: "
+                                                + rs.getInt("year") + ", price: " + rs.getDouble("price"));
+                        }
+                        DBConnection.closeConnection(conn);
+
+                } catch (SQLException e) {
+                        System.out.println("Connection failed: " + e.getMessage());
+                }
         }
 }
