@@ -6,8 +6,10 @@ import java.sql.SQLException;
 
 public class DBConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/dealership";
-    private static final String USER = "YOUR_USER";
-    private static final String PASSWORD = "YOUR_PASSWORD";
+    private static final String USER = System.getenv("DB_USER") != null ? System.getenv("DB_USER") : "YOUR_USERNAME";
+    // Replace YOUR_USERNAME with your database credentials
+    private static final String PASSWORD = System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : "YOUR_PASSWORD";
+    // Replace DB_PASSWORD with your database credentials
 
     /**
      * Establishes a connection to the database.
