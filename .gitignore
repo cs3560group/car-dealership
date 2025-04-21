@@ -1,3 +1,6 @@
 .vscode
 bin
 lib
+out
+target
+*.class
