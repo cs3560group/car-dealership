@@ -50,7 +50,7 @@ Use MySQL CLI or Workbench:
 3. Assign USER and PASSWORD to your own local database user and password 
 4. Run the app
 ```bash
-mvn clean compile exec:java
+mvn clean compile javafx:run
 ```
 
 ## Contributing (Pull Request)
