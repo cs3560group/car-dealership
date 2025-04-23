@@ -1,4 +1,4 @@
-package com.dealership;
+package com.dealership.services;
  
  public class Management {
      private String managerID;

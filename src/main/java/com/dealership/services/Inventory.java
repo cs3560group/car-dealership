@@ -1,8 +1,9 @@
-package com.dealership;
+package com.dealership.services;
 
-import com.dealership.models.Vehicle; //import needed to store vehicle objects
 import java.util.ArrayList;
 import java.util.List;
+
+import com.dealership.models.Vehicle;
 
 public class Inventory {
     private int thresholdLimit;

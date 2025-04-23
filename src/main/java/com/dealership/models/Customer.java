@@ -55,4 +55,11 @@ public class Customer {
         System.out.println("Email: " + email);
         System.out.println("ID: " + ID);
     }
+
+    public String getCustomerInfo() {
+        return "Name: " + name + "\n"
+             + "Phone Number: " + phoneNumber + "\n"
+             + "Email: " + email + "\n"
+             + "ID: " + ID;
+    }
 }

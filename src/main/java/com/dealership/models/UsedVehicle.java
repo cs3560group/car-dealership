@@ -16,7 +16,7 @@ public class UsedVehicle extends Vehicle {
 
     // Override displayInfo method
     // This method will display the information of the used vehicle
-    @Override   
+    @Override
     public void displayInfo() {
         System.out.println("VIN: " + vin);
         System.out.println("Make: " + make);

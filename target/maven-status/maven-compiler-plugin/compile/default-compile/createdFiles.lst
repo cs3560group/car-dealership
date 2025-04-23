@@ -4,6 +4,7 @@ com\dealership\models\Employee.class
 com\dealership\services\Sales.class
 com\dealership\db\DBConnection.class
 com\dealership\models\UsedVehicle.class
+com\dealership\ui\controllers\LandingController.class
 com\dealership\services\Inventory.class
 com\dealership\models\Supplier.class
 com\dealership\services\Management.class

@@ -27,7 +27,10 @@ Alejandro Manzo - @alejandro2520 - amanzo@cpp.edu
 Minimum requirements
 
 ```bash
-#Any required tool to run the project
+- Java JDK (version 11 or higher)
+- Apache Maven (3.6 or higher)
+- MySQL Server (8.0+ recommended)
+- MySQL Workbench (optional for GUI access)
 ```
 
 Recommended extensions
@@ -37,12 +40,18 @@ Recommended extensions
 Extension Pack for Java
 ```
 
-Clone the repository
+1. **Clone the repository**
 
 ```bash
 git clone https://github.com/cs3560group/car-dealership.git
 ```
-
+2. Import the Database
+Use MySQL CLI or Workbench:
+3. Assign USER and PASSWORD to your own local database user and password 
+4. Run the app
+```bash
+mvn clean compile exec:java
+```
 
 ## Contributing (Pull Request)
 
