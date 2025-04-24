@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400" prefWidth="600" spacing="10" style="-fx-padding: 10;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.InventoryController">
+    <HBox prefHeight="25.0" prefWidth="361.0" spacing="10">
+        <TextField fx:id="searchField" promptText="Search by make or model" />
+        <Button onAction="#handleSearch" text="Search" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button onAction="#goBack" mnemonicParsing="false" prefHeight="20.0" prefWidth="52.0" text="Return" />
+    </HBox>
+
+    <GridPane fx:id="vehicleGrid" hgap="20" vgap="20" />
+</VBox>

@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String URL = System.getenv("DB_URL") != null ? System.getenv("DB_URL") : "jdbc:mysql://localhost:3306/your_database_name";
-    private static final String USER = System.getenv("DB_USER") != null ? System.getenv("DB_USER") : "YOUR_USERNAME";
+    private static final String URL = System.getenv("DB_URL");
+    private static final String USER = System.getenv("DB_USER");
     // Replace YOUR_USERNAME with your database credentials
-    private static final String PASSWORD = System.getenv("DB_PASSWORD") != null ? System.getenv("DB_PASSWORD") : "YOUR_PASSWORD";
+    private static final String PASSWORD = System.getenv("DB_PASSWORD");
     // Replace DB_PASSWORD with your database credentials
 
     /**

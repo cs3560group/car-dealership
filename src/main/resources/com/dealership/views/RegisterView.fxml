@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dealership.controllers.RegisterController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <Label layoutX="250.0" layoutY="50.0" text="Register">
+            <font><Font size="22.0" /></font>
+        </Label>
+
+        <Label layoutX="110.0" layoutY="100.0" text="Name" />
+        <TextField fx:id="nameField" layoutX="180.0" layoutY="95.0" prefWidth="260.0"/>
+
+        <Label layoutX="110.0" layoutY="145.0" text="Email" />
+        <TextField fx:id="emailField" layoutX="180.0" layoutY="140.0" prefWidth="260.0"/>
+
+        <Label layoutX="110.0" layoutY="190.0" text="Password" />
+        <PasswordField fx:id="passwordField" layoutX="180.0" layoutY="185.0" prefWidth="260.0"/>
+
+        <Label layoutX="110.0" layoutY="235.0" text="Role" />
+        <ComboBox fx:id="roleCombo" layoutX="180.0" layoutY="230.0" prefWidth="260.0" />
+
+        <Button layoutX="260.0" layoutY="290.0" text="Register" onAction="#handleRegister"/>
+        <Button layoutX="500.0" layoutY="15.0" text="Return" onAction="#handleReturn"/>
+    </children>
+</AnchorPane>

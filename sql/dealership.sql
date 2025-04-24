@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8mb4 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -40,91 +40,6 @@ LOCK TABLES `customers` WRITE;
 /*!40000 ALTER TABLE `customers` DISABLE KEYS */;
 INSERT INTO `customers` VALUES (1,'tai','taibui97@outlook.com','6579668339'),(2,'Tai','tai@example.com','6579668339'),(3,'Linh','linh@gmail.com','4081234567'),(4,'Alex','alex@domain.com','3109876543'),(5,'Maria','maria@company.com','9162345678'),(6,'John','john@yahoo.com','7023456789');
 /*!40000 ALTER TABLE `customers` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `employees`
---
-
-DROP TABLE IF EXISTS `employees`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `employees` (
-  `employeeID` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `phone_number` varchar(20) DEFAULT NULL,
-  `role` varchar(20) DEFAULT NULL,
-  `Inventories_inventoryID` int DEFAULT NULL,
-  PRIMARY KEY (`employeeID`),
-  UNIQUE KEY `email` (`email`),
-  KEY `fk_employees_inventories1_idx` (`Inventories_inventoryID`),
-  CONSTRAINT `fk_employees_inventories1` FOREIGN KEY (`Inventories_inventoryID`) REFERENCES `inventories` (`inventoryID`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `employees`
---
-
-LOCK TABLES `employees` WRITE;
-/*!40000 ALTER TABLE `employees` DISABLE KEYS */;
-INSERT INTO `employees` VALUES (1,'keren','keren@mfas.com','12345678','cleaner',NULL),(2,'Emma','emma@dealership.com','4081234560','Salesperson',NULL),(3,'Chris','chris@dealership.com','3105557890','Mechanic',NULL),(4,'Sophie','sophie@dealership.com','2139876543','Receptionist',NULL),(5,'David','david@dealership.com','7072341234','Manager',NULL),(6,'Nina','nina@dealership.com','6198765432','Finance',NULL);
-/*!40000 ALTER TABLE `employees` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `inventories`
---
-
-DROP TABLE IF EXISTS `inventories`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `inventories` (
-  `inventoryID` int NOT NULL AUTO_INCREMENT,
-  `totalStock` int DEFAULT NULL,
-  `thresholdLimit` int DEFAULT NULL,
-  `suppliers_supplierID` int NOT NULL,
-  `managements_managerID` int NOT NULL,
-  PRIMARY KEY (`inventoryID`),
-  KEY `fk_inventories_suppliers1_idx` (`suppliers_supplierID`),
-  KEY `fk_inventories_managements1_idx` (`managements_managerID`),
-  CONSTRAINT `fk_inventories_managements1` FOREIGN KEY (`managements_managerID`) REFERENCES `managements` (`managerID`),
-  CONSTRAINT `fk_inventories_suppliers1` FOREIGN KEY (`suppliers_supplierID`) REFERENCES `suppliers` (`supplierID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `inventories`
---
-
-LOCK TABLES `inventories` WRITE;
-/*!40000 ALTER TABLE `inventories` DISABLE KEYS */;
-/*!40000 ALTER TABLE `inventories` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `managements`
---
-
-DROP TABLE IF EXISTS `managements`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `managements` (
-  `managerID` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `position` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`managerID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `managements`
---
-
-LOCK TABLES `managements` WRITE;
-/*!40000 ALTER TABLE `managements` DISABLE KEYS */;
-/*!40000 ALTER TABLE `managements` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -169,8 +84,7 @@ CREATE TABLE `sales` (
   PRIMARY KEY (`saleID`),
   KEY `fk_sales_customers_idx` (`customers_customerID`),
   KEY `fk_sales_employees1_idx` (`employees_employeeID`),
-  CONSTRAINT `fk_sales_customers` FOREIGN KEY (`customers_customerID`) REFERENCES `customers` (`customerID`),
-  CONSTRAINT `fk_sales_employees1` FOREIGN KEY (`employees_employeeID`) REFERENCES `employees` (`employeeID`)
+  CONSTRAINT `fk_sales_customers` FOREIGN KEY (`customers_customerID`) REFERENCES `customers` (`customerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -234,6 +148,33 @@ LOCK TABLES `usedvehicles` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `users` (
+  `userID` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `password` varchar(50) DEFAULT NULL,
+  `role` enum('admin','employee','manager','customer') NOT NULL DEFAULT 'employee',
+  PRIMARY KEY (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'alice','casdca@asfdcas.com',NULL,'employee'),(2,'dasda','dasd@sdfsdfsd','sdfsdf','employee');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `vehicles`
 --
 
@@ -253,7 +194,6 @@ CREATE TABLE `vehicles` (
   PRIMARY KEY (`VIN`),
   KEY `fk_vehicles_sales1_idx` (`sales_saleID`),
   KEY `fk_vehicles_inventories1_idx` (`inventories_inventoryID`),
-  CONSTRAINT `fk_vehicles_inventories1` FOREIGN KEY (`inventories_inventoryID`) REFERENCES `inventories` (`inventoryID`),
   CONSTRAINT `fk_vehicles_sales1` FOREIGN KEY (`sales_saleID`) REFERENCES `sales` (`saleID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -267,14 +207,6 @@ LOCK TABLES `vehicles` WRITE;
 INSERT INTO `vehicles` VALUES ('DZD8P0RR75HS3BVJG','Toyota','Camry',2020,24000,'Available','New',NULL,0),('ERXGHWGEZ4F32W54J','Ford','Focus',2021,21000,'Available','New',NULL,0),('P1174T147UEZC8FB0','Honda','Civic',2019,22000,'Sold','Used',NULL,0),('V1M27SX4Z80LVTCBH','Nissan','Altima',2022,25000,'Available','New',NULL,0),('Z3ZEVGY9SD41BW29A','Chevrolet','Impala',2018,23000,'In Maintenance','Used',NULL,0);
 /*!40000 ALTER TABLE `vehicles` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Dumping events for database 'dealership'
---
-
---
--- Dumping routines for database 'dealership'
---
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -285,4 +217,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-04-18 22:46:35
+-- Dump completed on 2025-04-24  0:36:32

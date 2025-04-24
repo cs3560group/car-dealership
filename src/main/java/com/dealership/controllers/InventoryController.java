@@ -1,4 +1,4 @@
-package com.dealership.ui.controllers;
+package com.dealership.controllers;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,6 +11,7 @@ import com.dealership.services.Inventory;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -20,8 +21,10 @@ import javafx.scene.layout.VBox;
 
 public class InventoryController {
 
-    @FXML private TextField searchField;
-    @FXML private GridPane vehicleGrid;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private GridPane vehicleGrid;
 
     private final ObservableList<Vehicle> displayedVehicles = FXCollections.observableArrayList();
     private final Inventory inventory = new Inventory(5);
@@ -36,7 +39,7 @@ public class InventoryController {
         String query = searchField.getText().trim().toLowerCase();
         displayedVehicles.setAll(inventory.getAvailableVehicles().stream()
                 .filter(v -> v.getMake().toLowerCase().contains(query) ||
-                             v.getModel().toLowerCase().contains(query))
+                        v.getModel().toLowerCase().contains(query))
                 .toList());
         updateVehicleGrid();
     }
@@ -74,4 +77,10 @@ public class InventoryController {
             System.out.println("Connection failed: " + e.getMessage());
         }
     }
+
+    @FXML
+    private void goBack(ActionEvent event) {
+        SceneManager.goBack();
+    }
+
 }

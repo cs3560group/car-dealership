@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.ui.controllers.LandingController">
+<StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.LandingController">
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
     <children>
         <Label layoutX="234.0" layoutY="110.0" text="Welcome">
@@ -21,16 +21,21 @@
                 <Image url="@../assets/logo.png" />
             </image>
         </ImageView>
-        <Button layoutX="169.0" layoutY="189.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="263.0" text="Login">
+        <Button layoutX="169.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleGoToLogin" prefHeight="51.0" prefWidth="263.0" text="LOGIN">
             <font>
                 <Font size="24.0" />
             </font>
         </Button>
-        <Button layoutX="169.0" layoutY="264.0" mnemonicParsing="false" onAction="#browseAsGuest" prefHeight="25.0" prefWidth="263.0" text="BROWSE AS GUEST">
+        <Button layoutX="169.0" layoutY="313.0" mnemonicParsing="false" onAction="#handleBrowseAsGuest" prefHeight="25.0" prefWidth="263.0" text="BROWSE AS GUEST">
             <font>
                 <Font size="24.0" />
             </font>
         </Button>
+         <Button layoutX="169.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleGoToRegister" prefHeight="25.0" prefWidth="263.0" text="REGISTER">
+            <font>
+               <Font size="24.0" />
+            </font>
+         </Button>
     </children>
     </AnchorPane>
 </StackPane>
