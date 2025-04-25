@@ -4,3 +4,4 @@ lib
 out
 target
 *.class
+.env

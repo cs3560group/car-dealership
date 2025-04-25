@@ -47,7 +47,12 @@ git clone https://github.com/cs3560group/car-dealership.git
 ```
 2. Import the Database
 Use MySQL CLI or Workbench:
-3. Set DB_URL, DB_PASSWORD and DB_USER environment variables to your own local database url, user and password 
+3. Create a .env file in the root of the project and add the following values:
+```bash
+DB_USER=your_database_username
+DB_PASSWORD=your_database_password
+DB_URL=jdbc:mysql://localhost:3306/dealership
+```
 4. Run the app
 ```bash
 mvn clean compile javafx:run
