@@ -1,8 +1,11 @@
 package com.dealership.auth;
 
+import com.dealership.models.User;
+
 public class Session {
     private static Boolean loggedIn = false;
-
+    private static User currentUser = null;
+    
     public static Boolean isLoggedIn() {
         return loggedIn;
     }
@@ -11,5 +14,13 @@ public class Session {
     }
     public static void logout() {
         loggedIn = false;
+    }
+
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+
+    public static void setCurrentUser(User user) {
+        currentUser = user;
     }
 }

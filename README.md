@@ -59,7 +59,7 @@ DB_URL=jdbc:mysql://localhost:3306/dealership
 4. Run the app
 
 ```bash
-mvn clean compile javafx:run
+mvn clean javafx:run
 ```
 
 ## Contributing (Pull Request)
