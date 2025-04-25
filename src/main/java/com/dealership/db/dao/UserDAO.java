@@ -2,12 +2,20 @@ package com.dealership.db.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.dealership.db.DBConnection;
 import com.dealership.models.User;
 
 public class UserDAO {
+    /**
+     * Adds a new user to the database.
+     *
+     * @param user the User object to be added
+     * @return true if the user was added successfully, false otherwise
+     * @throws SQLException if a database access error occurs
+     */
     public static boolean addUser(User user) throws SQLException {
         try (Connection conn = DBConnection.getConnection()) {
             String sql = "INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)";
@@ -23,6 +31,62 @@ public class UserDAO {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+     * Validates a user by checking their email or userID and password.
+     *
+     * @param idOrEmail the email or userID of the user
+     * @param password  the password of the user
+     * @return a User object if the credentials are valid, null otherwise
+     * @throws SQLException if a database access error occurs
+     */
+    public static User validateUser(String idOrEmail, String password) throws SQLException {
+        try (Connection conn = DBConnection.getConnection()) {
+            String sql = "SELECT * FROM users WHERE email = ? OR userID = ? AND password = ?";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, idOrEmail);
+            stmt.setString(2, String.valueOf(idOrEmail));
+            stmt.setString(3, password);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new User(rs.getInt("userID"), rs.getString("name"), rs.getString("password"),
+                        rs.getString("role"), rs.getString("email"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Registers a new user in the system.
+     *
+     * @throws SQLException if a database access error occurs
+     */
+    public static void registerUser(User user) throws SQLException {
+        String name = user.getName();
+        String emailText = user.getEmail();
+        String passwordText = user.getPassword();
+        String role = user.getRole();
+
+        // Validate input fields
+        if (name.isEmpty() || emailText.isEmpty() || passwordText.isEmpty() || role.isEmpty()) {
+            // Show error message to the user
+            System.out.println("Please fill in all fields.");
+            return;
+        }
+
+        User newUser = new User(name, passwordText, role, emailText);
+        boolean isRegistered = UserDAO.addUser(newUser); // Call UserDAO to register the user
+        if (isRegistered) {
+            // Show success message to the user
+            System.out.println("User registered successfully.");
+        } else {
+            // Show error message to the user
+            System.out.println("Registration failed. Please try again.");
         }
     }
 }

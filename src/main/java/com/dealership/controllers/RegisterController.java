@@ -26,33 +26,13 @@ public class RegisterController {
         roleCombo.getSelectionModel().selectFirst(); // Optional default
     }
 
-    public void registerUser() throws SQLException {
-        String name = nameField.getText();
-        String emailText = emailField.getText();
-        String passwordText = passwordField.getText();
-        String role = roleCombo.getValue().toLowerCase();
-
-        // Validate input fields
-        if (name.isEmpty() || emailText.isEmpty() || passwordText.isEmpty() || role.isEmpty()) {
-            // Show error message to the user
-            System.out.println("Please fill in all fields.");
-            return;
-        }
-
-        User newUser = new User(name, passwordText, role, emailText);
-        boolean isRegistered = UserDAO.addUser(newUser); // Call UserDAO to register the user
-        if (isRegistered) {
-            // Show success message to the user
-            System.out.println("User registered successfully.");
-        } else {
-            // Show error message to the user
-            System.out.println("Registration failed. Please try again.");
-        }
-    }
-
+    /**
+     * Handles the registration button click event.
+     */
     public void handleRegister() {
         try {
-            registerUser();
+            UserDAO.registerUser(
+                    new User(nameField.getText(), passwordField.getText(), roleCombo.getValue(), emailField.getText()));
         } catch (SQLException e) {
             e.printStackTrace();
             // Show error message to the user
@@ -61,6 +41,7 @@ public class RegisterController {
     }
 
     public void handleReturn() {
-
+        // Go back to the previous scene
+        SceneManager.goBack();
     }
 }

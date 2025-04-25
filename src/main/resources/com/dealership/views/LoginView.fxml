@@ -14,12 +14,12 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label layoutX="116.0" layoutY="93.0" text="Username">
+      <Label layoutX="116.0" layoutY="93.0" text="Enter ID or Email">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameField" layoutX="116.0" layoutY="127.0" prefHeight="25.0" prefWidth="368.0" />
+      <TextField fx:id="idOrEmailField" layoutX="116.0" layoutY="127.0" prefHeight="25.0" prefWidth="368.0" />
       <PasswordField fx:id="passwordField" layoutX="116.0" layoutY="200.0" prefHeight="25.0" prefWidth="368.0" />
       <Label layoutX="119.0" layoutY="164.0" text="Password">
          <font>
@@ -31,6 +31,6 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <Button onAction="#goBack" layoutX="522.0" layoutY="20.0" mnemonicParsing="false" text="Return" />
+      <Button layoutX="522.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBack" text="Return" />
    </children>
 </AnchorPane>

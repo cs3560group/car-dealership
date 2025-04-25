@@ -48,11 +48,4 @@ public class Supplier {
     public void setSupplierID(String supplierID) {
         this.supplierID = supplierID;
     }
-
-    public void printSupplierInfo() {
-        System.out.println("Supplier Name: " + supplierName);
-        System.out.println("Supplier Phone Number: " + supplierPhoneNumber);
-        System.out.println("Supplier Email: " + supplierEmail);
-        System.out.println("Supplier ID: " + supplierID);
-    }
 }
