@@ -16,7 +16,7 @@ Alejandro Manzo - @alejandro2520 - amanzo@cpp.edu
 
 **Vehicle Management**: Able to add/update, and remove sold vehicles with details like **the make, model**, price, year, new/used, and status.
 
-**Search and filter**: Searching for vehicles based on certain criteria. 
+**Search and filter**: Searching for vehicles based on certain criteria.
 
 **Sales Tracking**: Updating a vehicle status when a sale occurs.
 
@@ -45,15 +45,19 @@ Extension Pack for Java
 ```bash
 git clone https://github.com/cs3560group/car-dealership.git
 ```
+
 2. Import the Database
-Use MySQL CLI or Workbench:
+   Use MySQL CLI or Workbench:
 3. Create a .env file in the root of the project and add the following values:
+
 ```bash
 DB_USER=your_database_username
 DB_PASSWORD=your_database_password
 DB_URL=jdbc:mysql://localhost:3306/dealership
 ```
+
 4. Run the app
+
 ```bash
 mvn clean compile javafx:run
 ```
@@ -66,7 +70,5 @@ mvn clean compile javafx:run
 4. Commit your changes.
 5. Push to your branch.
 6. Open a pull request with detailed information about changes made.
-   - PR title:  task name
+   - PR title: task name
    - PR body: follow PR template
-
-
