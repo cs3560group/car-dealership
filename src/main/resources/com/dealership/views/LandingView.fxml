@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
@@ -7,35 +8,44 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 
 <StackPane xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.LandingController">
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
-    <children>
-        <Label layoutX="234.0" layoutY="110.0" text="Welcome">
-            <font>
-                <Font size="32.0" />
-            </font>
-        </Label>
-        <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="225.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../assets/logo.png" />
-            </image>
-        </ImageView>
-        <Button layoutX="169.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleGoToLogin" prefHeight="51.0" prefWidth="263.0" text="LOGIN">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Button>
-        <Button layoutX="169.0" layoutY="313.0" mnemonicParsing="false" onAction="#handleBrowseAsGuest" prefHeight="25.0" prefWidth="263.0" text="BROWSE AS GUEST">
-            <font>
-                <Font size="24.0" />
-            </font>
-        </Button>
-         <Button layoutX="169.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleGoToRegister" prefHeight="25.0" prefWidth="263.0" text="REGISTER">
-            <font>
-               <Font size="24.0" />
-            </font>
-         </Button>
-    </children>
-    </AnchorPane>
+   <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <children>
+         <AnchorPane prefHeight="394.0" prefWidth="279.0" styleClass="left-form" stylesheets="@../styles/landing.css">
+            <children>
+              <ImageView fitHeight="300.0" fitWidth="341.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                      <Image url="@../assets/logo.png" />
+                  </image>
+              </ImageView>
+            </children>
+         </AnchorPane>
+          <AnchorPane layoutX="293.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="279.0" stylesheets="@../styles/landingDesign.css">
+          <children>
+              <Label layoutX="34.0" layoutY="120.0" prefHeight="35.0" prefWidth="229.0" text="Welcome!" textFill="#094b90">
+                  <font>
+                      <Font size="24.0" />
+                  </font>
+              </Label>
+              <Button layoutX="218.0" layoutY="3.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="57.0" styleClass="close" stylesheets="@../styles/landing.css">
+                <graphic>
+                    <FontIcon iconLiteral="fas-times" />
+                  </graphic>
+               </Button>
+               <MFXButton buttonType="RAISED" depthLevel="LEVEL3" layoutX="31.0" layoutY="213.0" onAction="#handleGoToLogin" prefHeight="57.0" prefWidth="218.0" rippleBackgroundOpacity="1.0" rippleColor="#464ff2" style="-fx-background-color: #464ff2;" text="LOGIN" textFill="WHITE">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </MFXButton>
+               <MFXButton buttonType="RAISED" layoutX="31.0" layoutY="291.0" onAction="#handleBrowseAsGuest" prefHeight="57.0" prefWidth="218.0" text="BROWSE AS GUEST">
+                  <font>
+                     <Font size="18.0" />
+                  </font>
+               </MFXButton>
+          </children>
+          </AnchorPane>
+      </children>
+   </AnchorPane>
 </StackPane>

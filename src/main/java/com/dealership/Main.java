@@ -15,7 +15,7 @@ public class Main extends Application {
         @Override
         public void start(Stage stage) throws Exception {
                 SceneManager.setStage(stage);
-                Parent root = FXMLLoader.load(getClass().getResource("/com/dealership/views/LandingView.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("/com/dealership/views/landingView.fxml"));
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();

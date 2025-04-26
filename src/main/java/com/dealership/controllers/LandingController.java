@@ -17,7 +17,7 @@ public class LandingController {
      * @throws IOException If an error occurs while loading the FXML file.
      */
     public void handleBrowseAsGuest(ActionEvent event) throws IOException {
-        Parent inventoryView = FXMLLoader.load(getClass().getResource("/com/dealership/views/InventoryView.fxml"));
+        Parent inventoryView = FXMLLoader.load(getClass().getResource("/com/dealership/views/inventoryView.fxml"));
         Scene root = new Scene(inventoryView);
         SceneManager.switchScene(root);
     }
@@ -30,7 +30,7 @@ public class LandingController {
      * @throws IOException If an error occurs while loading the FXML file.
      */
     public void handleGoToLogin(ActionEvent event) throws IOException {
-        Parent loginView = FXMLLoader.load(getClass().getResource("/com/dealership/views/LoginView.fxml"));
+        Parent loginView = FXMLLoader.load(getClass().getResource("/com/dealership/views/loginView.fxml"));
         Scene root = new Scene(loginView);
         SceneManager.switchScene(root);
     }
@@ -43,7 +43,7 @@ public class LandingController {
      * @throws IOException If an error occurs while loading the FXML file.
      */
     public void handleGoToRegister(ActionEvent event) throws IOException {
-        Parent registerView = FXMLLoader.load(getClass().getResource("/com/dealership/views/RegisterView.fxml"));
+        Parent registerView = FXMLLoader.load(getClass().getResource("/com/dealership/views/registerView.fxml"));
         Scene root = new Scene(registerView);
         SceneManager.switchScene(root);
     }

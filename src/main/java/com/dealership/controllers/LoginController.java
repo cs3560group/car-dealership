@@ -50,7 +50,7 @@ public class LoginController {
                     Session.setCurrentUser(user);
                     if (user.getRole().equals("admin")) {
                         Parent userManagementView = FXMLLoader
-                                .load(getClass().getResource("/com/dealership/views/UserManagementView.fxml"));
+                                .load(getClass().getResource("/com/dealership/views/admin_view/Admin.fxml"));
                         root = new Scene(userManagementView);
                         // } else if (user.getRole().equals("Manager")) {
                         // Parent ManagerView = FXMLLoader
@@ -58,7 +58,7 @@ public class LoginController {
                         // root = new Scene(ManagerView);
                     } else {
                         Parent inventoryView = FXMLLoader
-                                .load(getClass().getResource("/com/dealership/views/InventoryView.fxml"));
+                                .load(getClass().getResource("/com/dealership/views/inventoryView.fxml"));
                         root = new Scene(inventoryView);
                     }
                     SceneManager.switchScene(root);

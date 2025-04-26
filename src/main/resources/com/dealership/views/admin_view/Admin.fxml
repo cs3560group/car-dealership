@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+
+<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.admin.SlideController">
+   <left>
+      <VBox prefHeight="400.0" prefWidth="132.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: white;" text="Dashboard" textFill="#1e1d1d" onMouseClicked="#homeHandler"/>
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: white;" text="User" textFill="#1e1d1d" onMouseClicked="#userHandler"/>
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: white;" text="Inventory" textFill="#1e1d1d" onMouseClicked="#inventoryHandler" />
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: white;" text="Sales" textFill="#1e1d1d" onMouseClicked="#saleHandler"/>
+            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: white;" text="Setting" textFill="#1e1d1d" onMouseClicked="#settingHandler"/>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <AnchorPane fx:id="ap" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text layoutX="156.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="dashboard" wrappingWidth="139.21630859375" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

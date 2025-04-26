@@ -1,0 +1,33 @@
+.close {
+  -fx-background-color: transparent;
+  -fx-cursor: hand;
+}
+.close:hover {
+  -fx-background-color: #ff3547;
+}
+
+.left-form {
+  -fx-background-color: linear-gradient(
+    to bottom right,
+    #020024,
+    #090979,
+    #00d4ff
+  );
+  -fx-border-color: #000;
+  -fx-border-width: 0.4px 0px 0.4px 0.4px;
+}
+.right-form {
+  -fx-background-color: #fff;
+  -fx-border-color: #000;
+  -fx-border-width: 0.4px 0.4px 0.4px 0.4px;
+}
+
+.back-button {
+  -fx-background-color: inherit;
+  -fx-border-width: 0.4px 0.4px 0.4px 0.4px;
+  -fx-cursor: hand;
+}
+
+.back-button:hover {
+  -fx-background-color: #38f59d;
+}
