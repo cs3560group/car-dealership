@@ -12,6 +12,8 @@ Steven Chong - @stevenchong77 - stevenchong@cpp.edu
 
 Alejandro Manzo - @alejandro2520 - amanzo@cpp.edu
 
+Michael Vazquez - @mialva05 - mavazquez@cpp.edu
+
 ## Usage and Features
 
 **Vehicle Management**: Able to add/update, and remove sold vehicles with details like **the make, model**, price, year, new/used, and status.
