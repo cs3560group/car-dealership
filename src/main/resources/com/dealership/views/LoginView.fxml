@@ -35,17 +35,13 @@
                   <Font size="18.0" />
                </font>
             </Button>
-            <Button layoutX="173.0" layoutY="5.0" mnemonicParsing="false" onAction="#goBack" prefHeight="24.0" prefWidth="57.0" styleClass="back-button" stylesheets="@../styles/landing.css" text="back">
+            <Button layoutX="229.0" layoutY="7.0" mnemonicParsing="false" onAction="#goBack" prefHeight="24.0" prefWidth="57.0" styleClass="back-button" stylesheets="@../styles/global.css">
                <graphic>
                   <FontIcon iconLiteral="fas-angle-left" iconSize="15" tabSize="12" text="" />
                </graphic>
                <font>
                   <Font size="13.0" />
-               </font></Button>
-            <Button layoutX="238.0" layoutY="5.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="57.0" styleClass="close" stylesheets="@../styles/landing.css">
-               <graphic>
-                  <FontIcon iconLiteral="fas-times" />
-               </graphic>
+               </font>
             </Button>
          </children>
       </AnchorPane>

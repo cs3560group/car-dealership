@@ -24,4 +24,12 @@
         <Button onAction="#handleEditUser" text="Edit User" />
         <Button onAction="#handleDeleteUser" text="Delete User" />
     </HBox>
+    <Button layoutX="173.0" layoutY="5.0" mnemonicParsing="false" onAction="#goBack" prefHeight="24.0" prefWidth="57.0" styleClass="back-button" stylesheets="@../styles/landing.css" text="back">
+        <graphic>
+           <FontIcon iconLiteral="fas-angle-left" iconSize="15" tabSize="12" text="" />
+        </graphic>
+        <font>
+           <Font size="13.0" />
+        </font>
+     </Button>
 </VBox>

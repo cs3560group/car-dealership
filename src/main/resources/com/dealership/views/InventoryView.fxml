@@ -6,13 +6,23 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.text.Font?>
+
 
 <VBox prefHeight="400" prefWidth="600" spacing="10" style="-fx-padding: 10;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.InventoryController">
     <HBox prefHeight="25.0" prefWidth="361.0" spacing="10">
         <TextField fx:id="searchField" promptText="Search by make or model" />
         <Button onAction="#handleSearch" text="Search" />
         <Region HBox.hgrow="ALWAYS" />
-        <Button onAction="#goBack" mnemonicParsing="false" prefHeight="20.0" prefWidth="52.0" text="Return" />
+        <Button layoutX="173.0" layoutY="5.0" mnemonicParsing="false" onAction="#goBack" prefHeight="24.0" prefWidth="57.0" styleClass="back-button" stylesheets="@../styles/global.css">
+            <graphic>
+               <FontIcon iconLiteral="fas-angle-left" iconSize="15" tabSize="12" />
+            </graphic>
+            <font>
+               <Font size="13.0" />
+            </font>
+         </Button>
     </HBox>
 
     <GridPane fx:id="vehicleGrid" hgap="20" vgap="20" />

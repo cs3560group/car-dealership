@@ -27,6 +27,13 @@
         <ComboBox fx:id="roleCombo" layoutX="180.0" layoutY="230.0" prefWidth="260.0" />
 
         <Button layoutX="260.0" layoutY="290.0" text="Register" onAction="#handleRegister"/>
-        <Button layoutX="500.0" layoutY="15.0" text="Return" onAction="#handleReturn"/>
+        <Button layoutX="173.0" layoutY="5.0" mnemonicParsing="false" onAction="#goBack" prefHeight="24.0" prefWidth="57.0" styleClass="back-button" stylesheets="@../styles/landing.css" text="back">
+            <graphic>
+               <FontIcon iconLiteral="fas-angle-left" iconSize="15" tabSize="12" text="" />
+            </graphic>
+            <font>
+               <Font size="13.0" />
+            </font>
+         </Button>
     </children>
 </AnchorPane>

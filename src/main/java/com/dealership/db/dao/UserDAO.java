@@ -85,10 +85,8 @@ public class UserDAO {
         User newUser = new User(name, passwordText, role, emailText);
         boolean isRegistered = UserDAO.addUser(newUser); // Call UserDAO to register the user
         if (isRegistered) {
-            // Show success message to the user
             System.out.println("User registered successfully.");
         } else {
-            // Show error message to the user
             System.out.println("Registration failed. Please try again.");
         }
     }
@@ -107,7 +105,6 @@ public class UserDAO {
                         rs.getInt("userID"),
                         rs.getString("name"),
                         rs.getString("email"),
-                        rs.getString("password"),
                         rs.getString("role"));
                 users.add(user);
             }
@@ -118,5 +115,33 @@ public class UserDAO {
         }
 
         return users;
+    }
+
+    public static void updateUser(User editingUser) {
+        String sql = "UPDATE users SET name = ?, email = ?, password = ?, role = ? WHERE userID = ?";
+
+        try (Connection conn = DBConnection.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, editingUser.getName());
+            stmt.setString(2, editingUser.getEmail());
+            stmt.setString(3, editingUser.getPassword());
+            stmt.setString(4, editingUser.getRole());
+            stmt.setInt(5, editingUser.getId());
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deleteUser(int id) {
+        String sql = "DELETE FROM users WHERE userID = ?";
+
+        try (Connection conn = DBConnection.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, id);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

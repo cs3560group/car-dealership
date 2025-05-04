@@ -22,12 +22,3 @@
   -fx-border-width: 0.4px 0.4px 0.4px 0.4px;
 }
 
-.back-button {
-  -fx-background-color: inherit;
-  -fx-border-width: 0.4px 0.4px 0.4px 0.4px;
-  -fx-cursor: hand;
-}
-
-.back-button:hover {
-  -fx-background-color: #38f59d;
-}
