@@ -15,6 +15,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -53,15 +56,24 @@ public class InventoryController {
      */
     @FXML
     private void handleSearch() {
-        // Get text from search field, remove whitespace, and convert to lowercase
-        String query = searchField.getText().trim().toLowerCase();
-        
-        if (query.isEmpty()) {
-            // If search field is empty, load all vehicles
-            loadAllVehicles();
-        } else {
-            // Otherwise, perform a filtered search using query
-            searchVehicles(query);
+        try {
+            // Get text from search field, remove whitespace, and convert to lowercase
+            String query = searchField.getText().trim().toLowerCase();
+            
+            if (query.isEmpty()) {
+                // If search field is empty, load all vehicles
+                loadAllVehicles();
+            } else {
+                // Otherwise, perform a filtered search using query
+                searchVehicles(query);
+
+                // Show info alert if no results were found
+                if (displayedVehicles.isEmpty()) {
+                    showInfoAlert("No Results", "No vehicles found", "No vehicles match your criteria: '" + query + "'");
+                }
+            }
+        } catch (Exception e) {
+            showErrorAlert("Search Error", "Failed to perform search", "An error occurred while searching: " + e.getMessage());
         }
     }
 
@@ -88,10 +100,18 @@ public class InventoryController {
             
             // Update the UI to show the vehicles
             updateVehicleGrid();
+
+            // Show warning if no vehicles are in inventory
+            if (displayedVehicles.isEmpty()) {
+                showWarningAlert("Empty Inventory", "No vehicles in inventory", "There are currently no vehicles in the inventory.");
+            }
         } catch (SQLException e) {
             // Log any database errors
             System.out.println("Connection failed: " + e.getMessage());
             e.printStackTrace();
+
+            // Show database connection error alert
+            showErrorAlert("Database Error", "Failed to connect to database", "Could not load vehicles: " + e.getMessage());
         }
     }
 
@@ -135,6 +155,9 @@ public class InventoryController {
         } catch (SQLException e) {
             System.out.println("Search failed: " + e.getMessage());
             e.printStackTrace();
+
+            // Show search error alert
+            showErrorAlert("Search Error", "Database search failed", "Failed to search for vehicles: " + e.getMessage());
         }
     }
 
@@ -143,47 +166,105 @@ public class InventoryController {
      * Creates a card for each vehicle and arranges them into a grid layout.
      */
     private void updateVehicleGrid() {
-        // Clear existing content from the grid
-        vehicleGrid.getChildren().clear();
+        try {
+            // Clear existing content from the grid
+            vehicleGrid.getChildren().clear();
 
-        // Define how many columns to use in the grid
-        int columnCount = 3;
-        
-        // Loop through each vehicle in our filtered list
-        for (int i = 0; i < displayedVehicles.size(); i++) {
-            Vehicle vehicle = displayedVehicles.get(i);
-
-            // Create a card (VBox) for each vehicle
-            VBox card = new VBox(5); // 5 is the spacing between elements
-            card.setPadding(new Insets(10)); // 10px padding inside the card
-            card.setStyle("-fx-border-color: #ccc; -fx-border-width: 1; -fx-background-color: #f9f9f9;");
-
-            // Create labels for each vehicle property - use Vehicle's getters
-            Label vinLabel = new Label("VIN: " + vehicle.getVin());  
-            Label makeLabel = new Label("Make: " + vehicle.getMake());
-            Label modelLabel = new Label("Model: " + vehicle.getModel());
-            Label yearLabel = new Label("Year: " + vehicle.getYear());
-            Label priceLabel = new Label("Price: $" + vehicle.getPrice());
-            Label statusLabel = new Label("Status: " + vehicle.getStatus());
-            Label conditionLabel = new Label("Condition: " + vehicle.getCondition());
-
-            // Add all labels to the card
-            card.getChildren().addAll(vinLabel, makeLabel, modelLabel, yearLabel, 
-                                     priceLabel, statusLabel, conditionLabel);
-
-            // Calculate grid position for this card
-            // The modulo (%) gives the column index (0, 1, or 2)
-            int col = i % columnCount;
-            // Integer division gives the row index
-            int row = i / columnCount;
+            // Define how many columns to use in the grid
+            int columnCount = 3;
             
-            // Add the card to the grid at the calculated position
-            vehicleGrid.add(card, col, row);
+            // Loop through each vehicle in our filtered list
+            for (int i = 0; i < displayedVehicles.size(); i++) {
+                Vehicle vehicle = displayedVehicles.get(i);
+
+                // Create a card (VBox) for each vehicle
+                VBox card = new VBox(5); // 5 is the spacing between elements
+                card.setPadding(new Insets(10)); // 10px padding inside the card
+                card.setStyle("-fx-border-color: #ccc; -fx-border-width: 1; -fx-background-color: #f9f9f9;");
+
+                // Create labels for each vehicle property - use Vehicle's getters
+                Label vinLabel = new Label("VIN: " + vehicle.getVin());  
+                Label makeLabel = new Label("Make: " + vehicle.getMake());
+                Label modelLabel = new Label("Model: " + vehicle.getModel());
+                Label yearLabel = new Label("Year: " + vehicle.getYear());
+                Label priceLabel = new Label("Price: $" + vehicle.getPrice());
+                Label statusLabel = new Label("Status: " + vehicle.getStatus());
+                Label conditionLabel = new Label("Condition: " + vehicle.getCondition());
+
+                // Add all labels to the card
+                card.getChildren().addAll(vinLabel, makeLabel, modelLabel, yearLabel, 
+                                        priceLabel, statusLabel, conditionLabel);
+
+                // Calculate grid position for this card
+                // The modulo (%) gives the column index (0, 1, or 2)
+                int col = i % columnCount;
+                // Integer division gives the row index
+                int row = i / columnCount;
+                
+                // Add the card to the grid at the calculated position
+                vehicleGrid.add(card, col, row);
+            }
+        } catch (Exception e) {
+            showErrorAlert("UI Error", "Failed to update vehicle display", "An error occurred while updating the display: " + e.getMessage());
         }
     }
 
     @FXML
     private void goBack(ActionEvent event) {
-        SceneManager.goBack();
+        try {
+            SceneManager.goBack();
+        } catch (Exception e) {
+            showErrorAlert("Navigation Error", "Failed to navigate back", "An error occurred while navigating: " + e.getMessage());
+        }
+    }
+
+        /**
+     * Shows an error alert dialog with the given title, header, and content.
+     */
+    private void showErrorAlert(String title, String header, String content) {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    
+    /**
+     * Shows a warning alert dialog with the given title, header, and content.
+     */
+    private void showWarningAlert(String title, String header, String content) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    
+    /**
+     * Shows an information alert dialog with the given title, header, and content.
+     */
+    private void showInfoAlert(String title, String header, String content) {
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+    
+    /**
+     * Shows a confirmation alert dialog with the given title, header, and content.
+     * Returns true if the user clicks OK, false otherwise.
+     */
+    private boolean showConfirmationAlert(String title, String header, String content) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        
+        // Show the alert and wait for response
+        ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+        
+        // Return true if the user clicked OK
+        return result == ButtonType.OK;
     }
 }
