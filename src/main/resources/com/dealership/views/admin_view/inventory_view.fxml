@@ -4,22 +4,33 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.dealership.controllers.admin.InventoryController"
             stylesheets="@../../styles/global.css">
 
-    <!-- Add Vehicle Button -->
-    <Button fx:id="addButton"
-            text="Add Vehicle"
-            layoutX="10.0"
-            layoutY="10.0"
-            onAction="#handleAddVehicle"
-            prefWidth="120.0"
-            styleClass="add-button"/>
+    <!-- Search and Add Vehicle Section -->
+    <HBox spacing="10.0" 
+          layoutX="10.0" 
+          layoutY="10.0" 
+          AnchorPane.leftAnchor="10.0" 
+          AnchorPane.rightAnchor="10.0">
+          
+        <Label text="Search:" styleClass="search-label" alignment="CENTER_RIGHT" prefHeight="25.0"/>
+        <TextField fx:id="searchField" promptText="Search by VIN, Make, Model..." prefWidth="300.0" onKeyReleased="#handleSearch"/>
+        
+        <Button fx:id="addButton"
+                text="Add Vehicle"
+                onAction="#handleAddVehicle"
+                prefWidth="120.0"
+                styleClass="add-button"/>
+    </HBox>
 
-    <!-- TableView below the button -->
+    <!-- TableView below the search and button -->
     <TableView fx:id="vehicleTable"
                layoutY="50.0"
                AnchorPane.leftAnchor="10.0"

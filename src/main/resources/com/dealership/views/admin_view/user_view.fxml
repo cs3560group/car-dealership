@@ -4,23 +4,29 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="432.0" stylesheets="@../../styles/global.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.admin.UserController">
 
    <children>
+      <!-- Search and Add User Controls -->
+      <HBox spacing="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <TextField fx:id="searchField" promptText="Search users..." HBox.hgrow="ALWAYS" onKeyReleased="#handleSearch" />
+            <Button fx:id="addUserButton" onAction="#handleAddUser" prefWidth="120.0" styleClass="add-button" text="Add User" />
+         </children>
+      </HBox>
 
-      <!-- Add User Button -->
-      <Button fx:id="addUserButton" layoutX="10.0" layoutY="10.0" onAction="#handleAddUser" prefWidth="120.0" styleClass="add-button" text="Add User" />
-
-              <TableView fx:id="userTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
-       <columns>
-           <TableColumn fx:id="idCol" text="ID" />
-           <TableColumn fx:id="nameCol" text="Name" />
-           <TableColumn fx:id="emailCol" text="Email" />
-           <TableColumn fx:id="roleCol" text="Role" />
-           <TableColumn fx:id="actionCol" text="Action" />
-       </columns>
-   </TableView>
-
+      <TableView fx:id="userTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+         <columns>
+            <TableColumn fx:id="idCol" text="ID" />
+            <TableColumn fx:id="nameCol" text="Name" />
+            <TableColumn fx:id="emailCol" text="Email" />
+            <TableColumn fx:id="roleCol" text="Role" />
+            <TableColumn fx:id="actionCol" text="Action" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
