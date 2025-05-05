@@ -25,7 +25,6 @@
     </repositories>
 
     <dependencies>
-  <!-- JavaFX Controls (needed if you're using GUI later) -->
       <dependency>
           <groupId>org.openjfx</groupId>
           <artifactId>javafx-controls</artifactId>

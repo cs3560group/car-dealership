@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 
-<VBox prefHeight="400" prefWidth="600" spacing="10" style="-fx-padding: 10;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.InventoryController">
+<VBox prefHeight="400" prefWidth="600" spacing="10" style="-fx-padding: 10;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.CustomerInventoryController">
     <HBox prefHeight="25.0" prefWidth="361.0" spacing="10">
         <TextField fx:id="searchField" promptText="Search by make or model" />
         <Button onAction="#handleSearch" text="Search" />

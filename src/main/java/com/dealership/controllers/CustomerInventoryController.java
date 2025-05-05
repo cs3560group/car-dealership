@@ -19,7 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class InventoryController {
+public class CustomerInventoryController {
 
     @FXML
     private TextField searchField;
@@ -81,6 +81,10 @@ public class InventoryController {
     @FXML
     private void goBack(ActionEvent event) {
         SceneManager.goBack();
+    }
+
+    public void refreshTable() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

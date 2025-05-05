@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/23.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.dealership.controllers.admin.EditVehicleController"
+            prefWidth="400" prefHeight="450"
+            stylesheets="@../../styles/global.css">
+
+    <children>
+        <VBox spacing="10" layoutX="20" layoutY="20">
+            <children>
+                <Label text="Edit Vehicle"/>
+                <TextField fx:id="vinField" promptText="VIN" editable="false"/>
+                <TextField fx:id="makeField" promptText="Make"/>
+                <TextField fx:id="modelField" promptText="Model"/>
+                <TextField fx:id="yearField" promptText="Year"/>
+                <TextField fx:id="priceField" promptText="Price"/>
+                <TextField fx:id="statusField" promptText="Status"/>
+                <TextField fx:id="conditionField" promptText="Condition"/>
+
+                <HBox spacing="10">
+                    <Button text="Save" onAction="#handleSave"/>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>

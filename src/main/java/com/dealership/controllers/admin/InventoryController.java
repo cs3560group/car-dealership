@@ -1,15 +1,22 @@
 package com.dealership.controllers.admin;
 
+import java.io.IOException;
+
 import com.dealership.db.dao.VehicleDAO;
 import com.dealership.models.Vehicle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class InventoryController {
     @FXML
@@ -54,14 +61,41 @@ public class InventoryController {
     private void addEditButtonToTable() {
         actionCol.setCellFactory(col -> new TableCell<>() {
             private final Button editButton = new Button("Edit");
+            private final Button deleteButton = new Button("Delete");
 
             {
+                editButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;");
+                deleteButton.setStyle("-fx-background-color: #f44336; -fx-text-fill: white; -fx-cursor: hand;");
+
                 editButton.setOnAction(e -> {
                     Vehicle vehicle = getTableView().getItems().get(getIndex());
-                    // TODO: Replace this with your own edit logic
-                    System.out.println("Editing: " + vehicle.getVin());
+                    try {
+                        FXMLLoader loader = new FXMLLoader(
+                                getClass().getResource("/com/dealership/views/admin_view/edit_vehicle_view.fxml"));
+                        Parent root = loader.load();
+                        EditVehicleController controller = loader.getController();
+                        controller.setVehicle(vehicle);
+                        controller.setInventoryController(InventoryController.this);
+
+                        Stage stage = new Stage();
+                        stage.setTitle("Edit Vehicle");
+                        stage.setScene(new Scene(root));
+                        stage.show();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
                 });
-                editButton.setStyle("-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-cursor: hand;");
+
+                deleteButton.setOnAction(e -> {
+                    Vehicle vehicle = getTableView().getItems().get(getIndex());
+                    try {
+                        VehicleDAO.deleteVehicle(vehicle.getVin());
+                        refreshVehicleTable();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+                });
             }
 
             @Override
@@ -70,7 +104,8 @@ public class InventoryController {
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(editButton);
+                    HBox buttons = new HBox(10, editButton, deleteButton);
+                    setGraphic(buttons);
                 }
             }
         });
@@ -78,7 +113,29 @@ public class InventoryController {
 
     @FXML
     private void handleAddVehicle() {
-        System.out.println("Add Vehicle clicked");
-        // TODO: Open form or scene to add a new vehicle
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/dealership/views/admin_view/add_vehicle_view.fxml"));
+            Parent root = loader.load();
+            AddVehicleController controller = loader.getController();
+            controller.setInventoryController(this);
+
+            Stage stage = new Stage();
+            stage.setTitle("Add Vehicle");
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void refreshVehicleTable() {
+        try {
+            vehicleList.setAll(VehicleDAO.getAllVehicles());
+            vehicleTable.setItems(vehicleList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

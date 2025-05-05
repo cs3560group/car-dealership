@@ -14,6 +14,7 @@ public class Session {
     }
     public static void logout() {
         loggedIn = false;
+        currentUser = null;
     }
 
     public static User getCurrentUser() {
@@ -22,5 +23,9 @@ public class Session {
 
     public static void setCurrentUser(User user) {
         currentUser = user;
+    }
+
+    public static boolean hasRole(String role) {
+        return currentUser != null && role != null && role.equalsIgnoreCase(currentUser.getRole());
     }
 }
