@@ -40,7 +40,6 @@ public class AddVehicleController {
     private TextField conditionField;
 
     private File selectedImageFile;
-    private String vehicleImagePath;
     private InventoryController inventoryController;
 
     @FXML
@@ -96,8 +95,6 @@ public class AddVehicleController {
                 // Store relative path in DB
                 String relativePath = "src/main/resources/images/" + fileName;
                 selectedImageFile = destFile; // Still keep reference if needed
-                vehicleImagePath = relativePath; // Save this to DB
-
                 // Show preview
                 carImageView.setImage(new Image(destFile.toURI().toString()));
 
