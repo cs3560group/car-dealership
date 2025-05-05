@@ -17,9 +17,10 @@ public class Vehicle {
     protected final DoubleProperty price;
     protected final StringProperty status;
     protected final StringProperty condition;
+    protected final IntegerProperty inventoryId;
 
     // Constructor
-    public Vehicle(String vin, String make, String model, int year, double price, String status, String condition) {
+    public Vehicle(String vin, String make, String model, int year, double price, String status, String condition, int inventoryId) {
         this.vin = new SimpleStringProperty(vin);
         this.make = new SimpleStringProperty(make);
         this.model = new SimpleStringProperty(model);
@@ -27,6 +28,7 @@ public class Vehicle {
         this.price = new SimpleDoubleProperty(price);
         this.status = new SimpleStringProperty(status);
         this.condition = new SimpleStringProperty(condition);
+        this.inventoryId = new SimpleIntegerProperty(inventoryId);
     }
 
     // Getters
@@ -58,6 +60,10 @@ public class Vehicle {
         return condition.get();
     }
 
+    public int getInventoryId() {
+        return inventoryId.get();
+    }
+
     // Property accessors (for JavaFX bindings)
     public StringProperty vinProperty() {
         return vin;
@@ -87,6 +93,10 @@ public class Vehicle {
         return condition;
     }
 
+    public IntegerProperty inventoryIdProperty() {
+        return inventoryId;
+    }
+
     // Setters
     public void setVin(String vin) {
         this.vin.set(vin);
@@ -114,6 +124,10 @@ public class Vehicle {
 
     public void setCondition(String condition) {
         this.condition.set(condition);
+    }
+
+    public void setInventoryId(int inventoryId) {
+        this.inventoryId.set(inventoryId);
     }
 
     // Business logic

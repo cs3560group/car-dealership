@@ -56,8 +56,9 @@ public class Inventory {
         double price = rs.getDouble("price");
         String status = rs.getString("status");
         String condition = rs.getString("condition");
+        int inventoryId = rs.getInt("inventories_inventoryID"); // Add this line
         
         // Create a new Vehicle instance with the extracted data
-        return new Vehicle(vin, make, model, year, price, status, condition);
+        return new Vehicle(vin, make, model, year, price, status, condition, inventoryId);
     }
 }
