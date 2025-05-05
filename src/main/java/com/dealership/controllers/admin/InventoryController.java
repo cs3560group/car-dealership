@@ -1,6 +1,8 @@
 package com.dealership.controllers.admin;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import com.dealership.db.dao.VehicleDAO;
 import com.dealership.models.Vehicle;
@@ -15,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -38,8 +41,11 @@ public class InventoryController {
     private TableColumn<Vehicle, String> conditionCol;
     @FXML
     private TableColumn<Vehicle, Void> actionCol;
+    @FXML
+    private TextField searchField;
 
     private final ObservableList<Vehicle> vehicleList = FXCollections.observableArrayList();
+    private List<Vehicle> allVehicles;
 
     @FXML
     public void initialize() {
@@ -52,10 +58,35 @@ public class InventoryController {
         conditionCol.setCellValueFactory(data -> data.getValue().conditionProperty());
         addEditButtonToTable();
         try {
-            vehicleList.setAll(VehicleDAO.getAllVehicles());
+            allVehicles = VehicleDAO.getAllVehicles();
+            vehicleList.setAll(allVehicles);
             vehicleTable.setItems(vehicleList);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void handleSearch() {
+        String searchText = searchField.getText().toLowerCase().trim();
+        
+        if (searchText.isEmpty()) {
+            // If search field is empty, show all vehicles
+            vehicleList.setAll(allVehicles);
+        } else {
+            // Filter vehicles based on search criteria
+            List<Vehicle> filteredList = allVehicles.stream()
+                    .filter(vehicle -> 
+                        vehicle.getVin().toLowerCase().contains(searchText) ||
+                        vehicle.getMake().toLowerCase().contains(searchText) ||
+                        vehicle.getModel().toLowerCase().contains(searchText) ||
+                        String.valueOf(vehicle.getYear()).contains(searchText) ||
+                        vehicle.getStatus().toLowerCase().contains(searchText) ||
+                        vehicle.getCondition().toLowerCase().contains(searchText)
+                    )
+                    .collect(Collectors.toList());
+            
+            vehicleList.setAll(filteredList);
         }
     }
 
@@ -133,7 +164,15 @@ public class InventoryController {
     @FXML
     public void refreshVehicleTable() {
         try {
-            vehicleList.setAll(VehicleDAO.getAllVehicles());
+            allVehicles = VehicleDAO.getAllVehicles();
+            
+            // Apply current search filter when refreshing
+            if (searchField != null && !searchField.getText().trim().isEmpty()) {
+                handleSearch();
+            } else {
+                vehicleList.setAll(allVehicles);
+            }
+            
             vehicleTable.setItems(vehicleList);
         } catch (Exception e) {
             e.printStackTrace();
