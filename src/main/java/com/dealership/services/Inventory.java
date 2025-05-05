@@ -1,5 +1,7 @@
 package com.dealership.services;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ public class Inventory {
 
     //method to get the total number of available vehicles in the inventory
     public List<Vehicle> getAvailableVehicles() {
-        return vehicles.stream().filter(v -> !v.isSold()) .toList();
+        return vehicles.stream().filter(v -> !v.isSold()).toList();
     }
 
     //method to return the total number of available vehicles in the inventory
@@ -36,5 +38,26 @@ public class Inventory {
 
     public int getThresholdLimit() {
         return thresholdLimit;
+    }
+    
+    /**
+     * Creates a Vehicle object from a database result set.
+     * 
+     * @param rs The ResultSet containing vehicle data
+     * @return A Vehicle object populated with data from the ResultSet
+     * @throws SQLException If there's an error accessing the ResultSet
+     */
+    public Vehicle createVehicleFromResultSet(ResultSet rs) throws SQLException {
+        // Get fields from ResultSet
+        String vin = rs.getString("VIN");
+        String make = rs.getString("make");
+        String model = rs.getString("model");
+        int year = rs.getInt("year");
+        double price = rs.getDouble("price");
+        String status = rs.getString("status");
+        String condition = rs.getString("condition");
+        
+        // Create a new Vehicle instance with the extracted data
+        return new Vehicle(vin, make, model, year, price, status, condition);
     }
 }
