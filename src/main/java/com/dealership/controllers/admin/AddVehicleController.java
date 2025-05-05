@@ -98,8 +98,6 @@ public class AddVehicleController {
                 // Show preview
                 carImageView.setImage(new Image(destFile.toURI().toString()));
 
-                System.out.println("Stored relative path: " + relativePath);
-
             } catch (IOException e) {
                 e.printStackTrace();
                 showAlert(Alert.AlertType.ERROR, "Failed to copy image.");

@@ -19,7 +19,12 @@
          </children>
       </HBox>
 
-      <TableView fx:id="userTable" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="50.0">
+      <TableView fx:id="userTable" 
+      layoutY="50.0"
+      AnchorPane.leftAnchor="10.0"
+      AnchorPane.rightAnchor="10.0"
+      AnchorPane.bottomAnchor="10.0"
+      prefHeight="340.0">
          <columns>
             <TableColumn fx:id="idCol" text="ID" />
             <TableColumn fx:id="nameCol" text="Name" />
@@ -27,6 +32,9 @@
             <TableColumn fx:id="roleCol" text="Role" />
             <TableColumn fx:id="actionCol" text="Action" />
          </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+        </columnResizePolicy>
       </TableView>
    </children>
 </AnchorPane>
