@@ -15,16 +15,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.Priority;
-import org.kordamp.ikonli.javafx.FontIcon;
 
 /**
  * Controller class for the inventory view.
@@ -34,13 +28,9 @@ public class CustomerInventoryController {
 
     // UI elements injected by JavaFX
     @FXML
-    private TextField searchField;
+    private TextField searchField; // Text field where user enters search terms
     @FXML
-    private GridPane vehicleGrid;
-    @FXML
-    private Label resultsLabel;
-    @FXML
-    private VBox emptyState;
+    private GridPane vehicleGrid; // Grid layout to display vehicle cards
 
     // Keep the ObservableList for tracking displayed vehicles
     private final ObservableList<Vehicle> displayedVehicles = FXCollections.observableArrayList();
@@ -54,15 +44,12 @@ public class CustomerInventoryController {
     public void initialize() {
         // When the view first loads, populate it with all vehicles from the database
         loadAllVehicles();
-        
-        // Set search field action - trigger search when Enter key is pressed
-        searchField.setOnAction(event -> handleSearch());
     }
 
     /**
      * Handles user input in the search field. 
      * This method is called when the user clicks the search button or 
-     * presses Enter in the search field.
+     * presses Enter in the search field (configured in FXML).
      */
     @FXML
     private void handleSearch() {
@@ -127,6 +114,7 @@ public class CustomerInventoryController {
             String likePattern = "%" + query + "%";
 
             // Set the parameters for the prepared statement
+            // Both parameters get the same search term to find matches in make OR model
             pstmt.setString(1, likePattern); // First ? in the SQL query (make)
             pstmt.setString(2, likePattern); // Second ? in the SQL query (model)
 
@@ -142,7 +130,7 @@ public class CustomerInventoryController {
                 displayedVehicles.add(inventory.createVehicleFromResultSet(rs));
             }
 
-            // Update the UI with search results
+            // Update the UI with search results;
             updateVehicleGrid();
         } catch (SQLException e) {
             System.out.println("Search failed: " + e.getMessage());
@@ -157,20 +145,6 @@ public class CustomerInventoryController {
     private void updateVehicleGrid() {
         // Clear existing content from the grid
         vehicleGrid.getChildren().clear();
-        
-        // Update results count label
-        int count = displayedVehicles.size();
-        resultsLabel.setText("Showing " + count + (count == 1 ? " vehicle" : " vehicles"));
-        
-        // Show empty state if no results found
-        if (count == 0) {
-            emptyState.setVisible(true);
-            vehicleGrid.setVisible(false);
-            return;
-        } else {
-            emptyState.setVisible(false);
-            vehicleGrid.setVisible(true);
-        }
 
         // Define how many columns to use in the grid
         int columnCount = 3;
@@ -179,111 +153,35 @@ public class CustomerInventoryController {
         for (int i = 0; i < displayedVehicles.size(); i++) {
             Vehicle vehicle = displayedVehicles.get(i);
 
-            // Create a card for each vehicle
-            VBox card = createVehicleCard(vehicle);
-            
+            // Create a card (VBox) for each vehicle
+            VBox card = new VBox(5); // 5 is the spacing between elements
+            card.setPadding(new Insets(10)); // 10px padding inside the card
+            card.setStyle("-fx-border-color: #ccc; -fx-border-width: 1; -fx-background-color: #f9f9f9;");
+
+            // Create labels for each vehicle property - use Vehicle's getters
+            Label vinLabel = new Label("VIN: " + vehicle.getVin());  
+            Label makeLabel = new Label("Make: " + vehicle.getMake());
+            Label modelLabel = new Label("Model: " + vehicle.getModel());
+            Label yearLabel = new Label("Year: " + vehicle.getYear());
+            Label priceLabel = new Label("Price: $" + vehicle.getPrice());
+            Label statusLabel = new Label("Status: " + vehicle.getStatus());
+            Label conditionLabel = new Label("Condition: " + vehicle.getCondition());
+
+            // Add all labels to the card
+            card.getChildren().addAll(vinLabel, makeLabel, modelLabel, yearLabel, 
+                                     priceLabel, statusLabel, conditionLabel);
+
             // Calculate grid position for this card
+            // The modulo (%) gives the column index (0, 1, or 2)
             int col = i % columnCount;
+            // Integer division gives the row index
             int row = i / columnCount;
             
             // Add the card to the grid at the calculated position
             vehicleGrid.add(card, col, row);
         }
     }
-    
-    /**
-     * Creates a styled vehicle card with all necessary information.
-     * @param vehicle The vehicle object to display
-     * @return A VBox containing the styled vehicle card
-     */
-    private VBox createVehicleCard(Vehicle vehicle) {
-        // Main card container
-        VBox card = new VBox();
-        card.getStyleClass().add("vehicle-card");
-        
-        // Vehicle image placeholder
-        StackPane imagePlaceholder = new StackPane();
-        imagePlaceholder.getStyleClass().add("vehicle-image");
-        
-        Label imageLabel = new Label(vehicle.getMake() + " " + vehicle.getModel() + " Image");
-        imageLabel.getStyleClass().add("vehicle-image-placeholder");
-        imagePlaceholder.getChildren().add(imageLabel);
-        
-        // Vehicle info container
-        VBox infoContainer = new VBox();
-        infoContainer.getStyleClass().add("vehicle-info");
-        
-        // Header with title and status
-        HBox header = new HBox();
-        header.getStyleClass().add("vehicle-header");
-        
-        Label titleLabel = new Label(vehicle.getMake() + " " + vehicle.getModel());
-        titleLabel.getStyleClass().add("vehicle-title");
-        
-        Label statusLabel = new Label(vehicle.getStatus());
-        statusLabel.getStyleClass().addAll("status-badge", "status-" + vehicle.getStatus().toLowerCase());
-        
-        HBox.setHgrow(titleLabel, Priority.ALWAYS);
-        header.getChildren().addAll(titleLabel, statusLabel);
-        
-        // Vehicle details
-        VBox details = new VBox(8);
-        
-        // VIN detail
-        HBox vinDetail = createDetailRow("fas-tag", "VIN: " + vehicle.getVin());
-        
-        // Year detail
-        HBox yearDetail = createDetailRow("fas-calendar", "Year: " + vehicle.getYear());
-        
-        // Price detail
-        HBox priceDetail = createDetailRow("fas-dollar-sign", "Price: $" + vehicle.getPrice());
-        priceDetail.getStyleClass().add("vehicle-price");
-        
-        // Condition detail
-        HBox conditionDetail = createDetailRow(
-            vehicle.getCondition().equals("New") ? "fas-star" : "fas-check",
-            "Condition: " + vehicle.getCondition()
-        );
-        conditionDetail.getStyleClass().add("condition-" + vehicle.getCondition().toLowerCase());
-        
-        details.getChildren().addAll(vinDetail, yearDetail, priceDetail, conditionDetail);
-        
-        // View details button
-        Button detailsButton = new Button("View Details");
-        detailsButton.getStyleClass().add("details-button");
-        
-        // Add all elements to the info container
-        infoContainer.getChildren().addAll(header, details, detailsButton);
-        
-        // Add elements to the main card
-        card.getChildren().addAll(imagePlaceholder, infoContainer);
-        
-        return card;
-    }
-    
-    /**
-     * Creates a detail row with an icon and text.
-     * @param iconLiteral The icon literal (FontIcon)
-     * @param text The text to display
-     * @return An HBox containing the icon and text
-     */
-    private HBox createDetailRow(String iconLiteral, String text) {
-        HBox row = new HBox();
-        row.getStyleClass().add("vehicle-detail");
-        
-        FontIcon icon = new FontIcon(iconLiteral);
-        icon.getStyleClass().add("detail-icon");
-        
-        Label label = new Label(text);
-        
-        row.getChildren().addAll(icon, label);
-        return row;
-    }
 
-    /**
-     * Handles the back button click event.
-     * Uses the SceneManager to navigate back.
-     */
     @FXML
     private void goBack(ActionEvent event) {
         SceneManager.goBack();
