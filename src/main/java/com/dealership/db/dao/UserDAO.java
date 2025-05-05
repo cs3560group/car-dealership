@@ -11,6 +11,9 @@ import java.util.List;
 import com.dealership.db.DBConnection;
 import com.dealership.models.User;
 
+import javafx.scene.control.Alert;
+
+@SuppressWarnings({ "CallToPrintStackTrace", "UseSpecificCatch", "unused" })
 public class UserDAO {
     /**
      * Adds a new user to the database.
@@ -77,8 +80,8 @@ public class UserDAO {
 
         // Validate input fields
         if (name.isEmpty() || emailText.isEmpty() || passwordText.isEmpty() || role.isEmpty()) {
-            // Show error message to the user
-            System.out.println("Please fill in all fields.");
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Please fill in all fields.");
+            alert.showAndWait();
             return;
         }
 

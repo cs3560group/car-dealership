@@ -10,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
+@SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch", "unused"})
 public class SlideController implements Initializable {
         @FXML
         private BorderPane bp;

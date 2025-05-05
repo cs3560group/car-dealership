@@ -12,7 +12,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
+@SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch", "unused"})
 public class AddUserController {
 
     @FXML

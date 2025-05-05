@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
+@SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch", "unused"})
 public class UserController {
 
     @FXML

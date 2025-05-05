@@ -17,8 +17,21 @@ public class Vehicle {
     protected final DoubleProperty price;
     protected final StringProperty status;
     protected final StringProperty condition;
+    protected StringProperty imagePath;
 
     // Constructor
+    public Vehicle(String vin, String make, String model, int year, double price, String status, String condition,
+            String imagePath) {
+        this.vin = new SimpleStringProperty(vin);
+        this.make = new SimpleStringProperty(make);
+        this.model = new SimpleStringProperty(model);
+        this.year = new SimpleIntegerProperty(year);
+        this.price = new SimpleDoubleProperty(price);
+        this.status = new SimpleStringProperty(status);
+        this.condition = new SimpleStringProperty(condition);
+        this.imagePath = new SimpleStringProperty(imagePath);
+    }
+
     public Vehicle(String vin, String make, String model, int year, double price, String status, String condition) {
         this.vin = new SimpleStringProperty(vin);
         this.make = new SimpleStringProperty(make);
@@ -58,6 +71,10 @@ public class Vehicle {
         return condition.get();
     }
 
+    public String getImagePath() {
+        return imagePath.get();
+    }
+
     // Property accessors (for JavaFX bindings)
     public StringProperty vinProperty() {
         return vin;
@@ -85,6 +102,10 @@ public class Vehicle {
 
     public StringProperty conditionProperty() {
         return condition;
+    }
+
+    public StringProperty imagePathProperty() {
+        return imagePath;
     }
 
     // Setters
@@ -116,6 +137,10 @@ public class Vehicle {
         this.condition.set(condition);
     }
 
+    public void setImagePath(String imagePath) {
+        this.imagePath.set(imagePath);
+    }
+
     // Business logic
     public boolean isSold() {
         return status.get() != null && status.get().equalsIgnoreCase("sold");
@@ -125,11 +150,8 @@ public class Vehicle {
         this.status.set("sold");
     }
 
-    public String getDisplayInfo() {
-        return "Make: " + getMake() +
-                ", Model: " + getModel() +
-                ", Year: " + getYear() +
-                ", Price: $" + getPrice();
+    public void markAsAvailable() {
+        this.status.set("available");
     }
 
 }

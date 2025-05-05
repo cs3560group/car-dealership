@@ -18,6 +18,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+@SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch", "unused"})
 public class InventoryController {
     @FXML
     private TableView<Vehicle> vehicleTable;

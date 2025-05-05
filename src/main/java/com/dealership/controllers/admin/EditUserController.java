@@ -11,6 +11,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+@SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch", "unused"})
 public class EditUserController {
 
     @FXML
@@ -30,6 +31,7 @@ public class EditUserController {
         roleComboBox.getItems().addAll("Admin", "Employee", "Manager");
     }
 
+    
     public void setUserData(User user) {
         this.editingUser = user;
         nameField.setText(user.getName());

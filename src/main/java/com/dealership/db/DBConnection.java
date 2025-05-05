@@ -28,11 +28,13 @@ public class DBConnection {
      *
      * @param connection the connection to close
      */
+    @SuppressWarnings("CallToPrintStackTrace")
     public static void closeConnection(Connection connection) {
         if (connection != null) {
             try {
                 connection.close();
             } catch (SQLException e) {
+                
                 e.printStackTrace();
             }
         }

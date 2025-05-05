@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<?import javafx.scene.image.*?>
 <AnchorPane xmlns="http://javafx.com/javafx/23.0.1" 
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.dealership.controllers.admin.EditVehicleController"
@@ -20,7 +20,9 @@
                 <TextField fx:id="priceField" promptText="Price"/>
                 <TextField fx:id="statusField" promptText="Status"/>
                 <TextField fx:id="conditionField" promptText="Condition"/>
-
+                <Button fx:id="uploadButton" text="Upload Image" onAction="#handleUploadImage"/>
+                <ImageView fx:id="carImageView" fitWidth="200" fitHeight="150" preserveRatio="true"/>
+                
                 <HBox spacing="10">
                     <Button text="Save" onAction="#handleSave"/>
                 </HBox>
