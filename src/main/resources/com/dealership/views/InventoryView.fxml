@@ -1,70 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane styleClass="main-container" stylesheets="@../styles/inventory.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.CustomerInventoryController">
-   <top>
-      <VBox styleClass="header">
-         <HBox alignment="CENTER_LEFT" styleClass="app-header">
-            <Label styleClass="header-title" text="Six Stars Dealership Inventory">
-               <font>
-                  <Font name="System Bold" size="22.0" />
-               </font>
-            </Label>
-            <HBox HBox.hgrow="ALWAYS" />
-            <Button onAction="#goBack" styleClass="back-button">
-               <graphic>
-                  <HBox alignment="CENTER" spacing="5.0">
-                     <FontIcon iconLiteral="fas-angle-left" iconSize="12" />
-                     <Label text="Back" />
-                  </HBox>
-               </graphic>
-            </Button>
-         </HBox>
-         <HBox styleClass="search-container">
-            <HBox styleClass="search-input-container">
-               <FontIcon iconLiteral="fas-search" iconSize="16" styleClass="search-icon" />
-               <TextField fx:id="searchField" onAction="#handleSearch" promptText="Search by make or model..." styleClass="search-field" HBox.hgrow="ALWAYS" />
-            </HBox>
-            <Button onAction="#handleSearch" styleClass="search-button" text="Search" />
-         </HBox>
-         <HBox styleClass="results-count">
-            <Label fx:id="resultsLabel" text="Showing 0 vehicles" />
-         </HBox>
-      </VBox>
-   </top>
-   <center>
-      <ScrollPane fitToWidth="true" styleClass="content-area">
-         <StackPane>
-            <!-- Empty state message -->
-            <VBox fx:id="emptyState" alignment="CENTER" spacing="15.0" styleClass="empty-state" visible="false">
-               <FontIcon iconLiteral="fas-exclamation-triangle" iconSize="48" styleClass="warning-icon" />
-               <Label styleClass="empty-title" text="No vehicles found">
-                  <font>
-                     <Font name="System Bold" size="18.0" />
-                  </font>
-               </Label>
-               <Label styleClass="empty-subtitle" text="Try adjusting your search terms or browse all vehicles." />
-            </VBox>
-            
-            <!-- Vehicle grid -->
-            <GridPane fx:id="vehicleGrid" hgap="24" styleClass="vehicle-grid" vgap="24">
-               <padding>
-                  <Insets bottom="24.0" left="24.0" right="24.0" top="24.0" />
-               </padding>
-            </GridPane>
-         </StackPane>
-      </ScrollPane>
-   </center>
-</BorderPane>
+
+<VBox prefHeight="400" prefWidth="600" spacing="10" style="-fx-padding: 10;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.CustomerInventoryController">
+    <HBox prefHeight="25.0" prefWidth="361.0" spacing="10">
+        <TextField fx:id="searchField" promptText="Search by make or model" />
+        <Button onAction="#handleSearch" text="Search" />
+        <Region HBox.hgrow="ALWAYS" />
+        <Button layoutX="173.0" layoutY="5.0" mnemonicParsing="false" onAction="#goBack" prefHeight="24.0" prefWidth="57.0" styleClass="back-button" stylesheets="@../styles/global.css">
+            <graphic>
+               <FontIcon iconLiteral="fas-angle-left" iconSize="15" tabSize="12" />
+            </graphic>
+            <font>
+               <Font size="13.0" />
+            </font>
+         </Button>
+    </HBox>
+
+    <GridPane fx:id="vehicleGrid" hgap="20" vgap="20" />
+</VBox>
