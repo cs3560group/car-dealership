@@ -25,7 +25,8 @@ public class VehicleDAO {
                         rs.getInt("year"),
                         rs.getDouble("price"),
                         rs.getString("status"),
-                        rs.getString("condition"));
+                        rs.getString("condition"),
+                        rs.getInt("inventories_inventoryID"));
                 vehicles.add(vehicle);
             }
         } catch (SQLException e) {
@@ -69,9 +70,9 @@ public class VehicleDAO {
         try (Connection conn = DBConnection.getConnection()) {
             Statement stmt = conn.createStatement();
             String sql = String.format(
-                    "INSERT INTO vehicles (VIN, make, model, year, price, status, `condition`) VALUES ('%s', '%s', '%s', %d, %.2f, '%s', '%s')",
+                    "INSERT INTO vehicles (VIN, make, model, year, price, status, `condition`, inventories_inventoryID) VALUES ('%s', '%s', '%s', %d, %.2f, '%s', '%s', %d)",
                     vehicle.getVin(), vehicle.getMake(), vehicle.getModel(), vehicle.getYear(),
-                    vehicle.getPrice(), vehicle.getStatus(), vehicle.getCondition());
+                    vehicle.getPrice(), vehicle.getStatus(), vehicle.getCondition(), vehicle.getInventoryId());
             stmt.executeUpdate(sql);
         } catch (SQLException e) {
             e.printStackTrace();

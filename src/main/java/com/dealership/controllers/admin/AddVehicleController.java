@@ -25,31 +25,34 @@ public class AddVehicleController {
     private TextField statusField;
     @FXML
     private TextField conditionField;
+    @FXML
+    private TextField inventoryIdField;
     private InventoryController inventoryController;
 
     @FXML
-    private void handleAddVehicle() {
-        try {
-            Vehicle vehicle = new Vehicle(
-                    vinField.getText(),
-                    makeField.getText(),
-                    modelField.getText(),
-                    Integer.parseInt(yearField.getText()),
-                    Double.parseDouble(priceField.getText()),
-                    statusField.getText(),
-                    conditionField.getText());
+private void handleAddVehicle() {
+    try {
+        Vehicle vehicle = new Vehicle(
+                vinField.getText(),
+                makeField.getText(),
+                modelField.getText(),
+                Integer.parseInt(yearField.getText()),
+                Double.parseDouble(priceField.getText()),
+                statusField.getText(),
+                conditionField.getText(),
+                Integer.parseInt(inventoryIdField.getText())); // Add inventoryId here
 
-            VehicleDAO.addVehicle(vehicle);
-            showAlert(Alert.AlertType.INFORMATION, "Vehicle added successfully!");
-            if (inventoryController != null) {
-                inventoryController.refreshVehicleTable();
-            }
-            closeWindow();
-        } catch (Exception e) {
-            e.printStackTrace();
-            showAlert(Alert.AlertType.ERROR, "Error adding vehicle.");
+        VehicleDAO.addVehicle(vehicle);
+        showAlert(Alert.AlertType.INFORMATION, "Vehicle added successfully!");
+        if (inventoryController != null) {
+            inventoryController.refreshVehicleTable();
         }
+        closeWindow();
+    } catch (Exception e) {
+        e.printStackTrace();
+        showAlert(Alert.AlertType.ERROR, "Error adding vehicle: " + e.getMessage());
     }
+}
 
     private void closeWindow() {
         Stage stage = (Stage) vinField.getScene().getWindow();

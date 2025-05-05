@@ -19,6 +19,7 @@
             <TextField fx:id="priceField" promptText="Price" />
             <TextField fx:id="statusField" promptText="Status" />
             <TextField fx:id="conditionField" promptText="Condition" />
+            <TextField fx:id="inventoryIdField" promptText="Inventory ID" />
 
             <HBox spacing="10">
                 <Button text="Add Vehicle" onAction="#handleAddVehicle" />
