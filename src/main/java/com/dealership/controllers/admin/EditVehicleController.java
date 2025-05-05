@@ -61,7 +61,7 @@ public class EditVehicleController {
         conditionField.setText(vehicle.getCondition());
         if (vehicle.getImagePath() != null) {
             System.out.println("Image path: " + vehicle.getImagePath());
-            carImageView.setImage(new Image(new File(vehicle.getImagePath()).toURI().toString()));
+            carImageView.setImage(new Image("file:images/" + vehicle.getImagePath()));
         } else {
             carImageView.setImage(null);
         }
@@ -79,7 +79,11 @@ public class EditVehicleController {
         currentVehicle.setPrice(Double.parseDouble(priceField.getText()));
         currentVehicle.setStatus(statusField.getText());
         currentVehicle.setCondition(conditionField.getText());
-
+        if (selectedImageFile != null) {
+            currentVehicle.setImagePath(selectedImageFile.getName());
+        } else {
+            currentVehicle.setImagePath(null);
+        }
         try {
             VehicleDAO.updateVehicle(currentVehicle);
             inventoryController.refreshVehicleTable();
@@ -113,8 +117,32 @@ public class EditVehicleController {
 
         File file = fileChooser.showOpenDialog(uploadButton.getScene().getWindow());
         if (file != null) {
-            selectedImageFile = file;
-            carImageView.setImage(new Image(file.toURI().toString()));
+            try {
+                // Define a runtime-accessible folder (e.g., ./images/)
+                File destinationDir = new File("images");
+                if (!destinationDir.exists()) {
+                    destinationDir.mkdirs(); // create directory if it doesn't exist
+                }
+
+                // Copy the selected image file into the images folder
+                File destFile = new File(destinationDir, file.getName());
+                java.nio.file.Files.copy(file.toPath(), destFile.toPath(),
+                        java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+
+                // Save only the filename
+                selectedImageFile = destFile;
+                carImageView.setImage(new Image(destFile.toURI().toString()));
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                showAlert("Failed to upload image: " + e.getMessage());
+
+            }
         }
+    }
+
+    private void showAlert(String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, message);
+        alert.showAndWait();
     }
 }

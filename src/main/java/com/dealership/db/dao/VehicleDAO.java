@@ -37,7 +37,7 @@ public class VehicleDAO {
     }
 
     public static void updateVehicle(Vehicle currentVehicle) {
-        String sql = "UPDATE vehicles SET make = ?, model = ?, year = ?, price = ?, status = ?, `condition` = ?, imagePath WHERE VIN = ?";
+        String sql = "UPDATE vehicles SET make = ?, model = ?, year = ?, price = ?, status = ?, `condition` = ?, imagePath = ? WHERE VIN = ?";
 
         try (Connection conn = DBConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -48,8 +48,9 @@ public class VehicleDAO {
             stmt.setDouble(4, currentVehicle.getPrice());
             stmt.setString(5, currentVehicle.getStatus());
             stmt.setString(6, currentVehicle.getCondition());
-            stmt.setString(7, currentVehicle.getVin());
-            stmt.setString(8, currentVehicle.getImagePath());
+            stmt.setString(7, currentVehicle.getImagePath());
+            stmt.setString(8, currentVehicle.getVin());
+
             stmt.executeUpdate();
 
         } catch (SQLException e) {
