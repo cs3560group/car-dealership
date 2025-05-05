@@ -45,7 +45,7 @@ public class AddVehicleController {
     @FXML
     @SuppressWarnings({ "CallToPrintStackTrace", "UseSpecificCatch", "unused" })
     private void handleAddVehicle() {
-        String imagePath = selectedImageFile != null ? selectedImageFile.getAbsolutePath() : null;
+        String imagePath = selectedImageFile != null ? selectedImageFile.getName() : null;
         try {
             Vehicle vehicle = new Vehicle(
                     vinField.getText(),

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx/23.0.1"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.dealership.controllers.admin.AddSaleController"
+      spacing="10" alignment="CENTER"
+      >
+      <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <Label text="Add New Sale" style="-fx-font-size: 16;" />
+    <TextField fx:id="priceField" promptText="Sale Price" />
+    <TextField fx:id="paymentField" promptText="Payment Method" />
+    <TextField fx:id="employeeIdField" promptText="Employee ID" />
+    <TextField fx:id="vinField" promptText="VIN" />
+    <TextField fx:id="customerNameField" promptText="Customer Name" />
+    <TextField fx:id="customerEmailField" promptText="Customer Email" />
+    <TextField fx:id="customerPhoneField" promptText="Customer Phone" />
+    <Button text="Submit" onAction="#handleSubmit" />
+</VBox>

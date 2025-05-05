@@ -21,7 +21,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-@SuppressWarnings({"CallToPrintStackTrace", "UseSpecificCatch", "unused"})
+@SuppressWarnings({ "CallToPrintStackTrace", "UseSpecificCatch", "unused" })
 public class InventoryController {
     @FXML
     private TableView<Vehicle> vehicleTable;
@@ -69,23 +69,21 @@ public class InventoryController {
     @FXML
     private void handleSearch() {
         String searchText = searchField.getText().toLowerCase().trim();
-        
+
         if (searchText.isEmpty()) {
             // If search field is empty, show all vehicles
             vehicleList.setAll(allVehicles);
         } else {
             // Filter vehicles based on search criteria
             List<Vehicle> filteredList = allVehicles.stream()
-                    .filter(vehicle -> 
-                        vehicle.getVin().toLowerCase().contains(searchText) ||
-                        vehicle.getMake().toLowerCase().contains(searchText) ||
-                        vehicle.getModel().toLowerCase().contains(searchText) ||
-                        String.valueOf(vehicle.getYear()).contains(searchText) ||
-                        vehicle.getStatus().toLowerCase().contains(searchText) ||
-                        vehicle.getCondition().toLowerCase().contains(searchText)
-                    )
+                    .filter(vehicle -> vehicle.getVin().toLowerCase().contains(searchText) ||
+                            vehicle.getMake().toLowerCase().contains(searchText) ||
+                            vehicle.getModel().toLowerCase().contains(searchText) ||
+                            String.valueOf(vehicle.getYear()).contains(searchText) ||
+                            vehicle.getStatus().toLowerCase().contains(searchText) ||
+                            vehicle.getCondition().toLowerCase().contains(searchText))
                     .collect(Collectors.toList());
-            
+
             vehicleList.setAll(filteredList);
         }
     }
@@ -165,14 +163,14 @@ public class InventoryController {
     public void refreshVehicleTable() {
         try {
             allVehicles = VehicleDAO.getAllVehicles();
-            
+
             // Apply current search filter when refreshing
             if (searchField != null && !searchField.getText().trim().isEmpty()) {
                 handleSearch();
             } else {
                 vehicleList.setAll(allVehicles);
             }
-            
+
             vehicleTable.setItems(vehicleList);
         } catch (Exception e) {
             e.printStackTrace();

@@ -37,7 +37,11 @@ public class DashboardController {
             employeeValue.setText(String.valueOf(employeeCount));
 
             // Total sales
-            totalSaleValue.setText("$ 0.00"); // Initialize to 0.00
+            ResultSet rs2 = stmt.executeQuery("SELECT SUM(salePrice) FROM sales");
+            double totalSales = 0;
+            if (rs2.next())
+                totalSales += rs2.getDouble(1);
+            totalSaleValue.setText(String.valueOf(totalSales));
 
             // Count inventory
             ResultSet rs3 = stmt.executeQuery("SELECT COUNT(*) FROM vehicles");
