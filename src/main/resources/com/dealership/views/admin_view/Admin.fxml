@@ -6,26 +6,76 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <?import javafx.scene.text.Font?>
-<?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<BorderPane fx:id="bp" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="700.0" prefHeight="400.0" prefWidth="835.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.dealership.controllers.admin.SlideController" stylesheets="@../../styles/global.css">
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="bp" 
+            minWidth="700.0" 
+            prefHeight="400.0" 
+            prefWidth="835.0" 
+            stylesheets="@../../styles/global.css"
+            xmlns="http://javafx.com/javafx/23.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="com.dealership.controllers.admin.SlideController">
    <left>
-      <VBox prefHeight="400.0" prefWidth="132.0" BorderPane.alignment="CENTER">
+      <VBox spacing="0" styleClass="sidebar-menu">
          <children>
-            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: white;" text="Dashboard" textFill="#1e1d1d" onMouseClicked="#homeHandler"/>
-            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: white;" text="User" textFill="#1e1d1d" onMouseClicked="#userHandler"/>
-            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: white;" text="Inventory" textFill="#1e1d1d" onMouseClicked="#inventoryHandler" />
-            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: white;" text="Sales" textFill="#1e1d1d" onMouseClicked="#saleHandler"/>
-            <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" style="-fx-background-color: transparent; -fx-border-color: white;" text="Setting" textFill="#1e1d1d" onMouseClicked="#settingHandler"/>
+            <Button styleClass="sidebar-button"
+                    mnemonicParsing="false" 
+                    prefHeight="49.0" 
+                    prefWidth="134.0"
+                    text="Dashboard"
+                    textFill="#1e1d1d"
+                    onMouseClicked="#homeHandler"/>
+            <Button styleClass="sidebar-button"
+                    mnemonicParsing="false" 
+                    prefHeight="49.0" 
+                    prefWidth="134.0"
+                    text="User"
+                    textFill="#1e1d1d"
+                    onMouseClicked="#userHandler"/>
+            <Button styleClass="sidebar-button"
+                    mnemonicParsing="false" 
+                    prefHeight="49.0" 
+                    prefWidth="134.0"
+                    text="Inventory"
+                    textFill="#1e1d1d"
+                    onMouseClicked="#inventoryHandler"/>
+            <Button styleClass="sidebar-button"
+                    mnemonicParsing="false" 
+                    prefHeight="49.0" 
+                    prefWidth="134.0"
+                    text="Sales"
+                    textFill="#1e1d1d"
+                    onMouseClicked="#saleHandler"/>
+            <Button styleClass="sidebar-button"
+                    mnemonicParsing="false" 
+                    prefHeight="49.0" 
+                    prefWidth="134.0"
+                    text="Settings"
+                    textFill="#1e1d1d"
+                    onMouseClicked="#settingHandler"/>
          </children>
+         <padding>
+            <Insets top="10.0" />
+         </padding>
       </VBox>
    </left>
    <center>
-      <AnchorPane fx:id="ap" prefHeight="200.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="ap" prefHeight="200.0" prefWidth="700.0">
          <children>
-            <Text layoutX="156.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="dashboard" wrappingWidth="139.21630859375" />
+            <Text layoutX="20.0" 
+                  layoutY="50.0" 
+                  styleClass="page-title"
+                  text="Dashboard">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Text>
          </children>
+         <padding>
+            <Insets top="20.0" right="20.0" bottom="20.0" left="20.0" />
+         </padding>
       </AnchorPane>
-      
    </center>
 </BorderPane>
